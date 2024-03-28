@@ -12,22 +12,42 @@ namespace pryValinotti
 {
     public partial class frmFirma : Form
     {
+        Graphics lienzo;
+        bool puedeDibujar = false;
+        List<Point> puntos = new List<Point>();
         public frmFirma()
         {
             InitializeComponent();
+            lienzo = pbDibujo.CreateGraphics();
         }
 
         private void cmdColor_Click(object sender, EventArgs e)
         {
             if (cdColor.ShowDialog() == DialogResult.OK)
             {
-                MessageBox.Show("Se selecciono un color");
+                pbColor.BackColor = cdColor.Color;
             }
-            else
-            {
-                MessageBox.Show("No se selecciono nada");
-            }
+        }
 
+        private void pbDibujo_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left) puedeDibujar = true;
+            else if (e.Button == MouseButtons.Right) puedeDibujar = false;
+        }
+
+        private void pbDibujo_MouseMove(object sender, MouseEventArgs e)
+        {
+            Brush brush = new SolidBrush(pbColor.BackColor);
+            int grosor = Convert.ToInt32(nudGrosor.Value);
+            if (puedeDibujar) lienzo.FillEllipse(brush, e.X, e.Y, grosor, grosor);
+        }
+
+        private void cmdGuardar_Click(object sender, EventArgs e)
+        {
+            if(sfGuardarFirma.ShowDialog() == DialogResult.OK)
+            {
+                return;
+            }
         }
     }
 }

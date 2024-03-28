@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.gbHerramientas = new System.Windows.Forms.GroupBox();
+            this.pbColor = new System.Windows.Forms.PictureBox();
             this.cmdGuardar = new System.Windows.Forms.Button();
             this.nudGrosor = new System.Windows.Forms.NumericUpDown();
             this.lblGrosor = new System.Windows.Forms.Label();
@@ -36,12 +37,12 @@
             this.gbDibujo = new System.Windows.Forms.GroupBox();
             this.pbDibujo = new System.Windows.Forms.PictureBox();
             this.cdColor = new System.Windows.Forms.ColorDialog();
-            this.pbColor = new System.Windows.Forms.PictureBox();
+            this.sfGuardarFirma = new System.Windows.Forms.SaveFileDialog();
             this.gbHerramientas.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudGrosor)).BeginInit();
             this.gbDibujo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbDibujo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbColor)).BeginInit();
             this.SuspendLayout();
             // 
             // gbHerramientas
@@ -58,14 +59,24 @@
             this.gbHerramientas.TabStop = false;
             this.gbHerramientas.Text = "Herramientas";
             // 
+            // pbColor
+            // 
+            this.pbColor.BackColor = System.Drawing.Color.Black;
+            this.pbColor.Location = new System.Drawing.Point(16, 68);
+            this.pbColor.Name = "pbColor";
+            this.pbColor.Size = new System.Drawing.Size(109, 53);
+            this.pbColor.TabIndex = 1;
+            this.pbColor.TabStop = false;
+            // 
             // cmdGuardar
             // 
             this.cmdGuardar.Location = new System.Drawing.Point(16, 397);
             this.cmdGuardar.Name = "cmdGuardar";
             this.cmdGuardar.Size = new System.Drawing.Size(109, 23);
             this.cmdGuardar.TabIndex = 0;
-            this.cmdGuardar.Text = "Guardar Dibujo";
+            this.cmdGuardar.Text = "Guardar Firma";
             this.cmdGuardar.UseVisualStyleBackColor = true;
+            this.cmdGuardar.Click += new System.EventHandler(this.cmdGuardar_Click);
             // 
             // nudGrosor
             // 
@@ -126,19 +137,14 @@
             this.pbDibujo.Size = new System.Drawing.Size(616, 398);
             this.pbDibujo.TabIndex = 0;
             this.pbDibujo.TabStop = false;
+            this.pbDibujo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbDibujo_MouseDown);
+            this.pbDibujo.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbDibujo_MouseMove);
             // 
-            // cdColor
+            // sfGuardarFirma
             // 
-            this.cdColor.FullOpen = true;
-            // 
-            // pbColor
-            // 
-            this.pbColor.BackColor = System.Drawing.Color.Black;
-            this.pbColor.Location = new System.Drawing.Point(16, 68);
-            this.pbColor.Name = "pbColor";
-            this.pbColor.Size = new System.Drawing.Size(109, 53);
-            this.pbColor.TabIndex = 1;
-            this.pbColor.TabStop = false;
+            this.sfGuardarFirma.Filter = "Archivos PNG (*.png)|*.png";
+            this.sfGuardarFirma.InitialDirectory = ".";
+            this.sfGuardarFirma.Title = "Guardar Firma";
             // 
             // frmFirma
             // 
@@ -153,10 +159,10 @@
             this.Text = "Firma";
             this.gbHerramientas.ResumeLayout(false);
             this.gbHerramientas.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbColor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudGrosor)).EndInit();
             this.gbDibujo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbDibujo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbColor)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -172,5 +178,6 @@
         private PictureBox pbDibujo;
         private ColorDialog cdColor;
         private PictureBox pbColor;
+        private SaveFileDialog sfGuardarFirma;
     }
 }
