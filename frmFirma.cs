@@ -14,7 +14,6 @@ namespace pryValinotti
     {
         Graphics lienzo;
         bool puedeDibujar = false;
-        List<Point> puntos = new List<Point>();
         public frmFirma()
         {
             InitializeComponent();
