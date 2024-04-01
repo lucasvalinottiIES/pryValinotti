@@ -108,6 +108,7 @@
             this.pbBullet.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbBullet.TabIndex = 5;
             this.pbBullet.TabStop = false;
+            this.pbBullet.Visible = false;
             // 
             // frmGalaga
             // 
@@ -115,15 +116,17 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(287, 450);
-            this.Controls.Add(this.pbBullet);
             this.Controls.Add(this.pbEnemyFour);
             this.Controls.Add(this.pbEnemyThree);
             this.Controls.Add(this.pbEnemyTwo);
             this.Controls.Add(this.pbEnemyOne);
             this.Controls.Add(this.pbPlayer);
+            this.Controls.Add(this.pbBullet);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "frmGalaga";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Galaga";
+            this.Text = "Galaga muy Trucho";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmGalaga_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pbPlayer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEnemyOne)).EndInit();
