@@ -66,6 +66,7 @@
             this.cmdGalaga.Name = "cmdGalaga";
             this.cmdGalaga.Size = new System.Drawing.Size(180, 22);
             this.cmdGalaga.Text = "Galaga";
+            this.cmdGalaga.Click += new System.EventHandler(this.cmdGalaga_Click);
             // 
             // frmPrincipal
             // 

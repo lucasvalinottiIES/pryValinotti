@@ -22,5 +22,11 @@ namespace pryValinotti
             frmFirma frm = new frmFirma();
             frm.ShowDialog();
         }
+
+        private void cmdGalaga_Click(object sender, EventArgs e)
+        {
+            frmGalaga frm = new frmGalaga();
+            frm.ShowDialog();
+        }
     }
 }
