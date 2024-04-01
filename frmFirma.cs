@@ -26,16 +26,21 @@ namespace pryValinotti
 
         private void pbDibujo_MouseMove(object sender, MouseEventArgs e)
         {
-            Pen pen = new Pen(pbColor.BackColor, 3);
+            decimal nudgrosor = nudGrosor.Value;
+            float grosor = 3 + (float)nudgrosor;
+            Pen pen = new Pen(pbColor.BackColor, grosor);
             if (e.Button == MouseButtons.Left) 
             {
                 try
                 {
-                // Agrego los puntos donde estuvo el mmouse para dibujar una linea
-                puntos.Add(e.Location);
-                lienzo.DrawCurve(pen, puntos.ToArray(), 0.5f);
-                pbDibujo.Image = bmpLienzo;
-                } catch (Exception ex) { MessageBox.Show("Intenta no presionar ambos botones al mismo tiempo :)"); }
+                    // Agrego los puntos donde estuvo el mmouse para dibujar una linea
+                    puntos.Add(e.Location);
+                    if(puntos.Count > 2)
+                    {
+                        lienzo.DrawCurve(pen, puntos.ToArray(), 0.5f);
+                    }
+                    pbDibujo.Image = bmpLienzo;
+                } catch (Exception ex) {  MessageBox.Show(ex.Message);}
 
                 // El siguiente codigo esta por las dudas llegue a ser mas eficiente, pero no
                 // lo es seguramente.
@@ -87,6 +92,10 @@ namespace pryValinotti
 
             // Liberar la memoria utilizada por el Bitmap
             bmp.Dispose();
+
+            // Vuelvo a crear el lienzo y el bitmap para que no de error de parameter Invalid.
+            bmpLienzo = new Bitmap(pbDibujo.Width, pbDibujo.Height);
+            lienzo = Graphics.FromImage(bmpLienzo);
         }
 
         private void cmdBorrar_Click(object sender, EventArgs e)

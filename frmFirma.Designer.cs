@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.gbHerramientas = new System.Windows.Forms.GroupBox();
+            this.nudGrosor = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.cmdBorrar = new System.Windows.Forms.Button();
             this.pbColor = new System.Windows.Forms.PictureBox();
@@ -37,6 +38,7 @@
             this.pbDibujo = new System.Windows.Forms.PictureBox();
             this.cdColor = new System.Windows.Forms.ColorDialog();
             this.gbHerramientas.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGrosor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbColor)).BeginInit();
             this.gbDibujo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbDibujo)).BeginInit();
@@ -44,6 +46,7 @@
             // 
             // gbHerramientas
             // 
+            this.gbHerramientas.Controls.Add(this.nudGrosor);
             this.gbHerramientas.Controls.Add(this.label1);
             this.gbHerramientas.Controls.Add(this.cmdBorrar);
             this.gbHerramientas.Controls.Add(this.pbColor);
@@ -54,6 +57,28 @@
             this.gbHerramientas.TabIndex = 0;
             this.gbHerramientas.TabStop = false;
             this.gbHerramientas.Text = "Herramientas";
+            // 
+            // nudGrosor
+            // 
+            this.nudGrosor.Location = new System.Drawing.Point(7, 160);
+            this.nudGrosor.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.nudGrosor.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudGrosor.Name = "nudGrosor";
+            this.nudGrosor.Size = new System.Drawing.Size(120, 23);
+            this.nudGrosor.TabIndex = 1;
+            this.nudGrosor.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label1
             // 
@@ -129,6 +154,7 @@
             this.Text = "Firma";
             this.gbHerramientas.ResumeLayout(false);
             this.gbHerramientas.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGrosor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbColor)).EndInit();
             this.gbDibujo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbDibujo)).EndInit();
@@ -146,5 +172,6 @@
         private PictureBox pbColor;
         private Button cmdBorrar;
         private Label label1;
+        private NumericUpDown nudGrosor;
     }
 }
