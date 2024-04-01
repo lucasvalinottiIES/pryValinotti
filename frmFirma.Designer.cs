@@ -91,7 +91,7 @@
             this.cmdGuardar.Name = "cmdGuardar";
             this.cmdGuardar.Size = new System.Drawing.Size(109, 23);
             this.cmdGuardar.TabIndex = 0;
-            this.cmdGuardar.Text = "Guardar Firma";
+            this.cmdGuardar.Text = "Guardar";
             this.cmdGuardar.UseVisualStyleBackColor = true;
             this.cmdGuardar.Click += new System.EventHandler(this.cmdGuardar_Click);
             // 
