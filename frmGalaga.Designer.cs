@@ -28,80 +28,105 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGalaga));
-            pbPlayer = new PictureBox();
-            clock = new System.Windows.Forms.Timer(components);
-            label1 = new Label();
-            lblScore = new Label();
-            lblJugar = new Label();
-            ((System.ComponentModel.ISupportInitialize)pbPlayer).BeginInit();
-            SuspendLayout();
+            this.pbPlayer = new System.Windows.Forms.PictureBox();
+            this.clock = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblScore = new System.Windows.Forms.Label();
+            this.lblJugar = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblVelocity = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPlayer)).BeginInit();
+            this.SuspendLayout();
             // 
             // pbPlayer
             // 
-            pbPlayer.Image = (Image)resources.GetObject("pbPlayer.Image");
-            pbPlayer.Location = new Point(153, 470);
-            pbPlayer.Name = "pbPlayer";
-            pbPlayer.Size = new Size(50, 50);
-            pbPlayer.SizeMode = PictureBoxSizeMode.StretchImage;
-            pbPlayer.TabIndex = 0;
-            pbPlayer.TabStop = false;
+            this.pbPlayer.Image = ((System.Drawing.Image)(resources.GetObject("pbPlayer.Image")));
+            this.pbPlayer.Location = new System.Drawing.Point(153, 485);
+            this.pbPlayer.Name = "pbPlayer";
+            this.pbPlayer.Size = new System.Drawing.Size(35, 35);
+            this.pbPlayer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbPlayer.TabIndex = 0;
+            this.pbPlayer.TabStop = false;
             // 
             // clock
             // 
-            clock.Interval = 25;
-            clock.Tick += clock_Tick;
+            this.clock.Interval = 25;
+            this.clock.Tick += new System.EventHandler(this.clock_Tick);
             // 
             // label1
             // 
-            label1.AutoSize = true;
-            label1.ForeColor = Color.Yellow;
-            label1.Location = new Point(29, 19);
-            label1.Name = "label1";
-            label1.Size = new Size(49, 15);
-            label1.TabIndex = 6;
-            label1.Text = "SCORE: ";
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.Yellow;
+            this.label1.Location = new System.Drawing.Point(29, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 15);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "SCORE: ";
             // 
             // lblScore
             // 
-            lblScore.AutoSize = true;
-            lblScore.ForeColor = Color.Yellow;
-            lblScore.Location = new Point(84, 19);
-            lblScore.Name = "lblScore";
-            lblScore.Size = new Size(19, 15);
-            lblScore.TabIndex = 7;
-            lblScore.Text = "00";
+            this.lblScore.AutoSize = true;
+            this.lblScore.ForeColor = System.Drawing.Color.Yellow;
+            this.lblScore.Location = new System.Drawing.Point(84, 19);
+            this.lblScore.Name = "lblScore";
+            this.lblScore.Size = new System.Drawing.Size(19, 15);
+            this.lblScore.TabIndex = 7;
+            this.lblScore.Text = "00";
             // 
             // lblJugar
             // 
-            lblJugar.AutoSize = true;
-            lblJugar.ForeColor = Color.Yellow;
-            lblJugar.Location = new Point(95, 184);
-            lblJugar.Name = "lblJugar";
-            lblJugar.Size = new Size(149, 15);
-            lblJugar.TabIndex = 8;
-            lblJugar.Text = "Presionar ENTER para jugar";
+            this.lblJugar.AutoSize = true;
+            this.lblJugar.ForeColor = System.Drawing.Color.Yellow;
+            this.lblJugar.Location = new System.Drawing.Point(95, 184);
+            this.lblJugar.Name = "lblJugar";
+            this.lblJugar.Size = new System.Drawing.Size(149, 15);
+            this.lblJugar.TabIndex = 8;
+            this.lblJugar.Text = "Presionar ENTER para jugar";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.Yellow;
+            this.label2.Location = new System.Drawing.Point(223, 19);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(62, 15);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "VELOCITY:";
+            // 
+            // lblVelocity
+            // 
+            this.lblVelocity.AutoSize = true;
+            this.lblVelocity.ForeColor = System.Drawing.Color.Yellow;
+            this.lblVelocity.Location = new System.Drawing.Point(291, 19);
+            this.lblVelocity.Name = "lblVelocity";
+            this.lblVelocity.Size = new System.Drawing.Size(19, 15);
+            this.lblVelocity.TabIndex = 10;
+            this.lblVelocity.Text = "01";
             // 
             // frmGalaga
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Black;
-            ClientSize = new Size(340, 532);
-            Controls.Add(lblJugar);
-            Controls.Add(lblScore);
-            Controls.Add(label1);
-            Controls.Add(pbPlayer);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-            MaximizeBox = false;
-            Name = "frmGalaga";
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "Galaga muy Trucho";
-            KeyDown += frmGalaga_KeyDown;
-            ((System.ComponentModel.ISupportInitialize)pbPlayer).EndInit();
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Black;
+            this.ClientSize = new System.Drawing.Size(340, 532);
+            this.Controls.Add(this.lblVelocity);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblJugar);
+            this.Controls.Add(this.lblScore);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.pbPlayer);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.Name = "frmGalaga";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Galaga muy Trucho";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmGalaga_KeyDown);
+            ((System.ComponentModel.ISupportInitialize)(this.pbPlayer)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
@@ -111,5 +136,7 @@
         private Label label1;
         private Label lblScore;
         private Label lblJugar;
+        private Label label2;
+        private Label lblVelocity;
     }
 }
