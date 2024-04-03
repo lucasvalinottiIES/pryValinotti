@@ -150,7 +150,7 @@ namespace pryValinotti
                 {
                     canShoot = false;
                     clock.Stop();
-                    DialogResult result = MessageBox.Show("Perdiste!", "Juego Terminado", MessageBoxButtons.YesNo);
+                    DialogResult result = MessageBox.Show("Perdiste! Volver a jugar?", "Juego Terminado", MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes)
                     {
                         restartGame();
@@ -161,7 +161,9 @@ namespace pryValinotti
                     }
                     else
                     {
+                        enemies.Clear();
                         this.Close();
+                        break;
                     }
                 }
             }
@@ -174,7 +176,7 @@ namespace pryValinotti
             {
                 score++;
                 lblScore.Text = string.Format("{0:D2}", score);
-                if (score > 0 && score % 10 == 0 && enemyVelocity < 7)
+                if (score > 0 && score % 10 == 0 && enemyVelocity < 10)
                 {
                     enemyVelocity++;
                     lblVelocity.Text = string.Format("{0:D2}", enemyVelocity);
@@ -185,7 +187,7 @@ namespace pryValinotti
             {
                 canShoot = false;
                 clock.Stop();
-                DialogResult result = MessageBox.Show("Perdiste!", "Juego Terminado", MessageBoxButtons.YesNo);
+                DialogResult result = MessageBox.Show("Perdiste! Volver a jugar?", "Juego Terminado", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
                 {
                     restartGame();
