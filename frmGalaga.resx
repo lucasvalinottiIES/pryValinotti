@@ -66,45 +66,7 @@
         gIZn75V2AzN09ph20C60AAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="pbEnemyOne.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAItJREFUOE+d
-        kQEOgDAIA/dcf+Tv/MrcxiAFihpNLhulFJO18fWS4/Inh4rCr4BpHvQmxDsJc4XwFJD9SRB0G8J8RFjm
-        c2ycxDvxQ6GbYAjBPsz5QeU1QLGk0PgUYH+wA+JTrRpO7YUXKRs5YHvNJ14q1mwPLBNxCiDWZC8Va6oA
-        RxxCsjc00Fxh3tZvT1+zncg8EPgAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="pbEnemyTwo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAG9JREFUOE+l
-        jAESgCAIBP3/I/uKYWAechZWNztzbEiRr/6Eyh2oVFqY91CpfD1Qy3Eh0+hkz/ACH/e8HPECH4uAnjkw
-        RSRMFtxXYICIuHHpuwMrO3k8MM8tqx3FSvyRdVZyy8wFMWAHIlTuQGWSUk9nWUd8Rn2w/gAAAABJRU5E
-        rkJggg==
-</value>
-  </data>
-  <data name="pbEnemyThree.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAKNJREFUOE+V
-        kwEOgzAMA3nuXt2vdHbSBDcNYpt0o766AQlx4TcPPsMYw69G13OKiAN1AKldR4KWwTGAaN+RIEWIRP3W
-        dySUw3yCWP81QIcQ9Vvf8TtZ0CKAPNzWd6TUHVBqtx0gGeFxL7NKJN3o89sAKy1n61XOvdVdh8kto0Qi
-        d97g2tklSyQdSKc+cifxdztgOShdIJtCfAflnXe08scB1/wCokewYXnTeWIAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="pbEnemyFour.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAItJREFUOE+d
-        kQEOgDAIA/dcf+Tv/MrcxiAFihpNLhulFJO18fWS4/Inh4rCr4BpHvQmxDsJc4XwFJD9SRB0G8J8RFjm
-        c2ycxDvxQ6GbYAjBPsz5QeU1QLGk0PgUYH+wA+JTrRpO7YUXKRs5YHvNJ14q1mwPLBNxCiDWZC8Va6oA
-        RxxCsjc00Fxh3tZvT1+zncg8EPgAAAAASUVORK5CYII=
-</value>
-  </data>
   <metadata name="clock.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="pbBullet.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAAMAAAAICAYAAAA870V8AAAABGdBTUEAALGPC/xhBQAAACZJREFUGFdj
-        AIL/DBn3/oNpVA6IAcMg4t49GAcoDSShyojgMPwHAEuAJ2kOpeq7AAAAAElFTkSuQmCC
-</value>
-  </data>
 </root>
