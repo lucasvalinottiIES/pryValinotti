@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPrincipal));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.marzoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmdFirma = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,6 +57,7 @@
             // 
             // cmdFirma
             // 
+            this.cmdFirma.Image = ((System.Drawing.Image)(resources.GetObject("cmdFirma.Image")));
             this.cmdFirma.Name = "cmdFirma";
             this.cmdFirma.Size = new System.Drawing.Size(180, 22);
             this.cmdFirma.Text = "Firma";
@@ -63,6 +65,7 @@
             // 
             // cmdGalaga
             // 
+            this.cmdGalaga.Image = ((System.Drawing.Image)(resources.GetObject("cmdGalaga.Image")));
             this.cmdGalaga.Name = "cmdGalaga";
             this.cmdGalaga.Size = new System.Drawing.Size(180, 22);
             this.cmdGalaga.Text = "Galaga";
