@@ -97,6 +97,11 @@ namespace pryValinotti
         public void createEnemies()
         {
             xPositionEnemy = 17;
+            foreach (PictureBox bullets in bullets)
+            {
+                bullets.Dispose();
+            }
+            bullets.Clear();
             for (int i = 0; i < enemyCount; i++)
             {
                 int nEnemy = r.Next(1, 4);
