@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -14,37 +15,41 @@ namespace pryValinotti
     {
 
         int score = 0;
-        int screenWidth = 356;
-        int screenHeight = 571;
+        int lives = 3;
 
+        clsPlayer player;
         // Variable para la creacion de enemigos.
-        int enemyCount = 7; // Cantidad de enemigos
         int xPositionEnemy = 17; // Posicion inicial del primer enemigo
-        int enemyVelocity = 1; // Velocidad inicial de los enemigos
+        int side = 1;
+        bool canMove = true;
         // Variable booleana para controlar que no se dispare antes de empezar a jugar
-        bool canShoot = false;
         Random r = new Random();
 
         // Listas para controlar tanto enemigos como balas.
-        List<PictureBox> enemies = new List<PictureBox>();
-        List<PictureBox> bullets = new List<PictureBox>();
+        List<clsEnemy> enemies = new List<clsEnemy>();
+        List<clsBullet> bullets = new List<clsBullet>();
+        List<clsBullet> ebullets = new List<clsBullet>();
+
         public frmGalaga()
         {
             InitializeComponent();
             createEnemies();
+            lblLives.Text = lives.ToString("D2");
         }
 
         private bool checkBulletCollision()
         {
-            foreach (PictureBox enemy in enemies)
+            foreach (clsEnemy enemy in enemies)
             {
-                foreach (PictureBox bullet in bullets)
+                foreach (clsBullet bullet in bullets)
                 {
                     // Comprobación de rectángulos superpuestos (ajustados para el tamaño de la bala)
-                    if (bullet.Bounds.IntersectsWith(enemy.Bounds))
+                    if (bullet.pbBullet.Bounds.IntersectsWith(enemy.pbEnemy.Bounds))
                     {
-                        enemy.Dispose();
-                        bullet.Dispose();
+                        score += enemy.level * 100;
+                        lblScore.Text = score.ToString();
+                        enemy.pbEnemy.Dispose();
+                        bullet.pbBullet.Dispose();
                         enemies.Remove(enemy);
                         bullets.Remove(bullet);
                         return true;
@@ -54,13 +59,30 @@ namespace pryValinotti
             return false;
         }
 
+        private void checkEBulletCollision()
+        {
+
+            foreach (clsBullet ebullet in ebullets)
+            {
+                // Comprobación de rectángulos superpuestos (ajustados para el tamaño de la bala)
+                if (ebullet.pbBullet.Bounds.IntersectsWith(player.pbPlayer.Bounds))
+                {
+                    lives--;
+                    lblLives.Text = lives.ToString("D2");
+                    ebullet.pbBullet.Dispose();
+                    bullets.Remove(ebullet);
+                    break;
+                }
+            }
+        }
+
         private bool checkEnemyCollision()
         {
-            foreach (PictureBox enemy in enemies)
-            {
-                if(pbPlayer.Bounds.IntersectsWith(enemy.Bounds))
+            foreach (clsEnemy enemy in enemies)
+            {   
+                if (player.pbPlayer.Bounds.IntersectsWith(enemy.pbEnemy.Bounds))
                 {
-                    enemy.Dispose();
+                    enemy.pbEnemy.Dispose();
                     enemies.Remove(enemy);
                     return true;
                 }
@@ -68,50 +90,23 @@ namespace pryValinotti
             return false;
         }
 
-        public void restartGame()
-        {
-            enemyVelocity = 1;
-            lblVelocity.Text = string.Format("{0:D2}", enemyVelocity);
-            foreach (PictureBox enemy in enemies) enemy.Dispose();
-            foreach (PictureBox bullet in bullets) bullet.Dispose();
-            enemies.Clear();
-            bullets.Clear();
-            createEnemies();
-        }
-
         public void createBullet()
         {
-            if (canShoot)
-            {
-                PictureBox bullet = new PictureBox();
-                bullet.Size = new Size(7, 15);
-                bullet.SizeMode = PictureBoxSizeMode.StretchImage;
-                bullet.Image = Image.FromFile($"./assets/Galaga/bullet.png");
-                bullet.Location = new Point(pbPlayer.Location.X + pbPlayer.Size.Width / 2, pbPlayer.Location.Y + pbPlayer.Size.Height / 2);
-                this.Controls.Add(bullet);
-                xPositionEnemy += (bullet.Size.Width + 10);
-                bullets.Add(bullet);
-            }
+            clsBullet bullet = new clsBullet(player.pbPlayer.Location, player.playerSize);
+            bullet.createBullet("p");
+            this.Controls.Add(bullet.pbBullet);
+            bullets.Add(bullet);
         }
 
         public void createEnemies()
         {
             xPositionEnemy = 17;
-            foreach (PictureBox bullets in bullets)
+            for (int i = 0; i < 7; i++)
             {
-                bullets.Dispose();
-            }
-            bullets.Clear();
-            for (int i = 0; i < enemyCount; i++)
-            {
-                int nEnemy = r.Next(1, 4);
-                PictureBox enemy = new PictureBox();
-                enemy.Size = new Size(35, 35);
-                enemy.SizeMode = PictureBoxSizeMode.StretchImage;
-                enemy.Image = Image.FromFile($"./assets/Galaga/enemy{nEnemy}.png");
-                enemy.Location = new Point(xPositionEnemy, 50);
-                this.Controls.Add(enemy);
-                xPositionEnemy += (enemy.Size.Width + 10);
+                clsEnemy enemy = new clsEnemy(new Point(xPositionEnemy,50));
+                enemy.createEnemy();
+                this.Controls.Add(enemy.pbEnemy);
+                xPositionEnemy += (enemy.enemySize.Width + 10);
                 enemies.Add(enemy);
             }  
         }
@@ -120,19 +115,11 @@ namespace pryValinotti
         {
             if (e.KeyCode == Keys.Right)
             {
-                pbPlayer.Location = new Point(pbPlayer.Location.X + 15, pbPlayer.Location.Y);
-                if (pbPlayer.Location.X > screenWidth - pbPlayer.Size.Width)
-                {
-                    pbPlayer.Location = new Point(screenWidth - pbPlayer.Size.Width, pbPlayer.Location.Y);
-                }
+                player.movePlayer("right");
             }
             else if (e.KeyCode == Keys.Left)
             {
-                pbPlayer.Location = new Point(pbPlayer.Location.X - 15, pbPlayer.Location.Y);
-                if (pbPlayer.Location.X < 0)
-                {
-                    pbPlayer.Location = new Point(0, pbPlayer.Location.Y);
-                }
+                player.movePlayer("left");
             }
             else if (e.KeyCode == Keys.Space)
             {
@@ -140,71 +127,79 @@ namespace pryValinotti
             }
             else if (e.KeyCode == Keys.Enter)
             {
-                lblJugar.Visible = false;
-                canShoot = true;
-                clock.Start();
+                if(lives > 0)
+                {
+                    lblJugar.Visible = false;
+                    clock.Start();
+
+                }
             }
         }
 
         private void clock_Tick(object sender, EventArgs e)
         {
-            foreach (PictureBox enemy in enemies)
+            List<clsBullet> bulletsCopy = new List<clsBullet>(bullets);
+            foreach (clsBullet bullet in bulletsCopy)
             {
-                enemy.Location = new Point(enemy.Location.X, enemy.Location.Y + enemyVelocity);
-                if (enemy.Bounds.Bottom > screenHeight)
+                bullet.Shoot("p");
+
+                if (bullet.pbBullet.Location.Y + bullet.bulletSize.Height < 0)
                 {
-                    canShoot = false;
-                    clock.Stop();
-                    DialogResult result = MessageBox.Show("Perdiste! Volver a jugar?", "Juego Terminado", MessageBoxButtons.YesNo);
-                    if (result == DialogResult.Yes)
-                    {
-                        restartGame();
-                        lblJugar.Visible = true;
-                        score = 0;
-                        lblScore.Text = string.Format("{0:D2}", score);
-                        break;
-                    }
-                    else
-                    {
-                        enemies.Clear();
-                        this.Close();
-                        break;
-                    }
+                    bullets.Remove(bullet);
+                    bullet.pbBullet.Dispose();
                 }
             }
-            foreach (PictureBox bullet in bullets)
+            List<clsBullet> ebulletsCopy = new List<clsBullet>(ebullets);
+
+            foreach (clsBullet bullet in ebulletsCopy)
             {
-                bullet.Location = new Point(bullet.Location.X, bullet.Location.Y - 5);
-                if (bullet.Location.Y < 0) bullet.Dispose();
-            }
-            if (checkBulletCollision())
-            {
-                score++;
-                lblScore.Text = string.Format("{0:D2}", score);
-                if (score > 0 && score % 10 == 0 && enemyVelocity < 10)
+                bullet.Shoot("e");
+
+                if (bullet.pbBullet.Location.Y > 465)
                 {
-                    enemyVelocity++;
-                    lblVelocity.Text = string.Format("{0:D2}", enemyVelocity);
-                }
-                if (enemies.Count == 0) createEnemies();
-            }
-            if (checkEnemyCollision())
-            {
-                canShoot = false;
-                clock.Stop();
-                DialogResult result = MessageBox.Show("Perdiste! Volver a jugar?", "Juego Terminado", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    restartGame();
-                    lblJugar.Visible = true;
-                    score = 0;
-                    lblScore.Text = string.Format("{0:D2}", score);
-                }
-                else
-                {
-                    this.Close();
+                    // Elimina la bala de la lista original
+                    bullets.Remove(bullet);
+
+                    // Libera la memoria del control PictureBox
+                    bullet.pbBullet.Dispose();
                 }
             }
+            foreach (clsEnemy enemy in enemies)
+            {
+                enemy.moveEnemy(side);
+                if(r.Next(1,200) == 1) // Una posibilidad entre 200 de disparar
+                {
+                    clsBullet eBullet = new clsBullet(enemy.enemyLocation, enemy.enemySize);
+                    eBullet.createBullet("e");
+                    this.Controls.Add(eBullet.pbBullet);
+                    ebullets.Add(eBullet);
+                }
+            }
+            if (enemies.Count < 7) 
+            {
+                foreach (clsEnemy enemy in enemies)
+                {
+                    enemy.moveEnemy();
+                }
+                createEnemies();
+            }
+            checkBulletCollision();
+            checkEBulletCollision();
+            checkEnemyCollision();
+            if (side < 8 && canMove) side++;
+            else
+            {
+                canMove = false;
+                side *= -1;
+            }
+            if(side < 0) canMove = true;
+        }
+
+        private void frmGalaga_Load(object sender, EventArgs e)
+        {
+            player = new clsPlayer(new Point(153, 383));
+            player.createPlayer();
+            this.Controls.Add(player.pbPlayer);
         }
     }
 }
