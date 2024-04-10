@@ -36,8 +36,6 @@
             this.lblJugar = new System.Windows.Forms.Label();
             this.lblHighScore = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.lblLives = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // clock
@@ -100,36 +98,12 @@
             this.label3.TabIndex = 9;
             this.label3.Text = "HIGH SCORE";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("ArcadeClassic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(268, 2);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 21);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "LIVES";
-            // 
-            // lblLives
-            // 
-            this.lblLives.AutoSize = true;
-            this.lblLives.Font = new System.Drawing.Font("ArcadeClassic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblLives.ForeColor = System.Drawing.Color.White;
-            this.lblLives.Location = new System.Drawing.Point(291, 23);
-            this.lblLives.Name = "lblLives";
-            this.lblLives.Size = new System.Drawing.Size(28, 18);
-            this.lblLives.TabIndex = 12;
-            this.lblLives.Text = "00";
-            // 
             // frmGalaga
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(340, 426);
-            this.Controls.Add(this.lblLives);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.lblHighScore);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lblJugar);
@@ -142,7 +116,7 @@
             this.MaximizeBox = false;
             this.Name = "frmGalaga";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Galaga muy Trucho";
+            this.Text = "Extreme Galaga";
             this.Load += new System.EventHandler(this.frmGalaga_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmGalaga_KeyDown);
             this.ResumeLayout(false);
@@ -157,7 +131,5 @@
         private Label lblJugar;
         private Label lblHighScore;
         private Label label3;
-        private Label label2;
-        private Label lblLives;
     }
 }

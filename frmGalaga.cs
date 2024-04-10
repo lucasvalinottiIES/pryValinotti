@@ -15,13 +15,12 @@ namespace pryValinotti
     {
 
         int score = 0;
-        int lives = 3;
 
         clsPlayer player;
+        bool playing = false;
         // Variable para la creacion de enemigos.
         int xPositionEnemy = 17; // Posicion inicial del primer enemigo
         int side = 1;
-        bool canMove = true;
         // Variable booleana para controlar que no se dispare antes de empezar a jugar
         Random r = new Random();
 
@@ -30,11 +29,11 @@ namespace pryValinotti
         List<clsBullet> bullets = new List<clsBullet>();
         List<clsBullet> ebullets = new List<clsBullet>();
 
-        public frmGalaga()
+        public frmGalaga(string playerName)
         {
             InitializeComponent();
             createEnemies();
-            lblLives.Text = lives.ToString("D2");
+            this.Text += $" - {playerName}";
         }
 
         private bool checkBulletCollision()
@@ -59,6 +58,36 @@ namespace pryValinotti
             return false;
         }
 
+        private void restartGame()
+        {
+            score += 0;
+            lblScore.Text = score.ToString();
+            // TODO: Si se supero el HighScore modificarlo.
+            List<clsBullet> bulletsCopy = new List<clsBullet>(bullets);
+            foreach (clsBullet bullet in bulletsCopy)
+            {
+                bullets.Remove(bullet);
+                bullet.pbBullet.Dispose();
+            }
+            List<clsBullet> ebulletsCopy = new List<clsBullet>(ebullets);
+
+            foreach (clsBullet bullet in ebulletsCopy)
+            {
+                bullets.Remove(bullet);
+                bullet.pbBullet.Dispose();
+            }
+            List<clsEnemy> enemyCopy = new List<clsEnemy>(enemies);
+
+            foreach (clsEnemy enemy in enemyCopy)
+            {
+                enemies.Remove(enemy);
+                enemy.pbEnemy.Dispose();
+            }
+            createEnemies();
+            player.pbPlayer.Location = new Point(153, 383);
+            lblJugar.Visible = true;
+        }
+
         private void checkEBulletCollision()
         {
 
@@ -67,11 +96,19 @@ namespace pryValinotti
                 // Comprobación de rectángulos superpuestos (ajustados para el tamaño de la bala)
                 if (ebullet.pbBullet.Bounds.IntersectsWith(player.pbPlayer.Bounds))
                 {
-                    lives--;
-                    lblLives.Text = lives.ToString("D2");
-                    ebullet.pbBullet.Dispose();
-                    bullets.Remove(ebullet);
-                    break;
+                    playing = false;
+                    clock.Stop();
+                    DialogResult result = MessageBox.Show("Perdiste :( \nVolver a Jugar? ", "Juego Terminado", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if(result == DialogResult.Yes)
+                    {
+                        restartGame();
+                    }
+                    else
+                    {
+                        ebullet.pbBullet.Dispose();
+                        bullets.Remove(ebullet);
+                        this.Close();
+                    }
                 }
             }
         }
@@ -100,6 +137,10 @@ namespace pryValinotti
 
         public void createEnemies()
         {
+            foreach (clsEnemy enemy in enemies)
+            {
+                enemy.moveEnemy();
+            }
             xPositionEnemy = 17;
             for (int i = 0; i < 7; i++)
             {
@@ -127,11 +168,11 @@ namespace pryValinotti
             }
             else if (e.KeyCode == Keys.Enter)
             {
-                if(lives > 0)
+                if(!playing)
                 {
                     lblJugar.Visible = false;
+                    playing = true;
                     clock.Start();
-
                 }
             }
         }
@@ -167,7 +208,7 @@ namespace pryValinotti
             foreach (clsEnemy enemy in enemies)
             {
                 enemy.moveEnemy(side);
-                if(r.Next(1,200) == 1) // Una posibilidad entre 200 de disparar
+                if(r.Next(1,201) == 1) // Una posibilidad entre 200 de disparar
                 {
                     clsBullet eBullet = new clsBullet(enemy.enemyLocation, enemy.enemySize);
                     eBullet.createBullet("e");
@@ -175,24 +216,16 @@ namespace pryValinotti
                     ebullets.Add(eBullet);
                 }
             }
-            if (enemies.Count < 7) 
+            if (enemies.Count < 5) 
             {
-                foreach (clsEnemy enemy in enemies)
-                {
-                    enemy.moveEnemy();
-                }
                 createEnemies();
+                if (r.Next(1, 51) == 1) createEnemies(); // 1 posibilidad entre 50 de crear dos filas de enemigos.
             }
             checkBulletCollision();
             checkEBulletCollision();
             checkEnemyCollision();
-            if (side < 8 && canMove) side++;
-            else
-            {
-                canMove = false;
-                side *= -1;
-            }
-            if(side < 0) canMove = true;
+            side += 1;
+            if (side == 8) side = -7;
         }
 
         private void frmGalaga_Load(object sender, EventArgs e)

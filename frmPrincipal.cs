@@ -25,7 +25,7 @@ namespace pryValinotti
 
         private void cmdGalaga_Click(object sender, EventArgs e)
         {
-            frmGalaga frm = new frmGalaga();
+            frmPlayer frm = new frmPlayer();
             frm.ShowDialog();
         }
     }
