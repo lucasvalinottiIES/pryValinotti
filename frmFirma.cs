@@ -29,18 +29,19 @@ namespace pryValinotti
             decimal nudgrosor = nudGrosor.Value;
             float grosor = 3 + (float)nudgrosor;
             Pen pen = new Pen(pbColor.BackColor, grosor);
-            if (e.Button == MouseButtons.Left) 
+            if (e.Button == MouseButtons.Left)
             {
                 try
                 {
                     // Agrego los puntos donde estuvo el mmouse para dibujar una linea
                     puntos.Add(e.Location);
-                    if(puntos.Count > 2)
+                    if (puntos.Count > 2)
                     {
                         lienzo.DrawCurve(pen, puntos.ToArray(), 0.5f);
                     }
                     pbDibujo.Image = bmpLienzo;
-                } catch (Exception ex) {  MessageBox.Show(ex.Message);}
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
 
                 // El siguiente codigo esta por las dudas llegue a ser mas eficiente, pero no
                 // lo es seguramente.
@@ -108,7 +109,6 @@ namespace pryValinotti
         {
             if (e.Button == MouseButtons.Left)
             {
-                pbDibujo.Cursor = Cursors.Cross;
                 puntos.Add(e.Location);
             }
             //else if (e.Button == MouseButtons.Right)
