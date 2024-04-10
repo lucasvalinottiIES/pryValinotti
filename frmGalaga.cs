@@ -16,8 +16,10 @@ namespace pryValinotti
 
         int score = 0;
 
-        clsPlayer player;
+        clsPlayer player = new clsPlayer(new Point(153, 383));
         bool playing = false;
+        bool canMove = false;
+        bool canShoot = false;
         // Variable para la creacion de enemigos.
         int xPositionEnemy = 17; // Posicion inicial del primer enemigo
         int side = 1;
@@ -60,8 +62,8 @@ namespace pryValinotti
 
         private void restartGame()
         {
-            score += 0;
-            lblScore.Text = score.ToString();
+            score = 0;
+            lblScore.Text = score.ToString("D2");
             // TODO: Si se supero el HighScore modificarlo.
             List<clsBullet> bulletsCopy = new List<clsBullet>(bullets);
             foreach (clsBullet bullet in bulletsCopy)
@@ -97,6 +99,8 @@ namespace pryValinotti
                 if (ebullet.pbBullet.Bounds.IntersectsWith(player.pbPlayer.Bounds))
                 {
                     playing = false;
+                    canShoot = false;
+                    canMove = false;
                     clock.Stop();
                     DialogResult result = MessageBox.Show("Perdiste :( \nVolver a Jugar? ", "Juego Terminado", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if(result == DialogResult.Yes)
@@ -121,6 +125,8 @@ namespace pryValinotti
                 {
                     enemy.pbEnemy.Dispose();
                     enemies.Remove(enemy);
+                    canShoot = false;
+                    canMove = false;
                     return true;
                 }
             }
@@ -139,7 +145,7 @@ namespace pryValinotti
         {
             foreach (clsEnemy enemy in enemies)
             {
-                enemy.moveEnemy();
+                enemy.moveEnemy();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
             }
             xPositionEnemy = 17;
             for (int i = 0; i < 7; i++)
@@ -154,15 +160,15 @@ namespace pryValinotti
 
         private void frmGalaga_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Right)
+            if (e.KeyCode == Keys.Right && canMove)
             {
                 player.movePlayer("right");
             }
-            else if (e.KeyCode == Keys.Left)
+            else if (e.KeyCode == Keys.Left && canMove)
             {
                 player.movePlayer("left");
             }
-            else if (e.KeyCode == Keys.Space)
+            else if (e.KeyCode == Keys.Space && canShoot)
             {
                 createBullet();
             }
@@ -172,6 +178,8 @@ namespace pryValinotti
                 {
                     lblJugar.Visible = false;
                     playing = true;
+                    canShoot = true;
+                    canMove = true;
                     clock.Start();
                 }
             }
@@ -229,8 +237,7 @@ namespace pryValinotti
         }
 
         private void frmGalaga_Load(object sender, EventArgs e)
-        {
-            player = new clsPlayer(new Point(153, 383));
+        {   
             player.createPlayer();
             this.Controls.Add(player.pbPlayer);
         }

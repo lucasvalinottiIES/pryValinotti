@@ -19,7 +19,7 @@ namespace pryValinotti
 
         private void cmdPlay_Click(object sender, EventArgs e)
         {
-            if(txtName.Text.Length > 0)
+            if (txtName.Text.Length > 0)
             {
                 this.Hide();
                 frmGalaga frm = new frmGalaga(txtName.Text);

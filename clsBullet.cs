@@ -28,7 +28,7 @@ namespace pryValinotti
 
         public void Shoot(string shooter)
         {
-            if(shooter == "p")
+            if (shooter == "p")
             {
                 this.pbBullet.Location = new Point(pbBullet.Location.X, pbBullet.Location.Y - 10);
             }

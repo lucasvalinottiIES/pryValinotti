@@ -29,55 +29,55 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPlayer));
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtName = new System.Windows.Forms.TextBox();
-            this.cmdPlay = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            label1 = new Label();
+            txtName = new TextBox();
+            cmdPlay = new Button();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(12, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(167, 37);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Player Name";
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(12, 18);
+            label1.Name = "label1";
+            label1.Size = new Size(167, 37);
+            label1.TabIndex = 0;
+            label1.Text = "Player Name";
             // 
             // txtName
             // 
-            this.txtName.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtName.Location = new System.Drawing.Point(12, 58);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(332, 43);
-            this.txtName.TabIndex = 1;
+            txtName.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            txtName.Location = new Point(12, 58);
+            txtName.Name = "txtName";
+            txtName.Size = new Size(332, 43);
+            txtName.TabIndex = 1;
             // 
             // cmdPlay
             // 
-            this.cmdPlay.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.cmdPlay.Location = new System.Drawing.Point(12, 107);
-            this.cmdPlay.Name = "cmdPlay";
-            this.cmdPlay.Size = new System.Drawing.Size(332, 71);
-            this.cmdPlay.TabIndex = 2;
-            this.cmdPlay.Text = "Play!";
-            this.cmdPlay.UseVisualStyleBackColor = true;
-            this.cmdPlay.Click += new System.EventHandler(this.cmdPlay_Click);
+            cmdPlay.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            cmdPlay.Location = new Point(12, 107);
+            cmdPlay.Name = "cmdPlay";
+            cmdPlay.Size = new Size(332, 71);
+            cmdPlay.TabIndex = 2;
+            cmdPlay.Text = "Play!";
+            cmdPlay.UseVisualStyleBackColor = true;
+            cmdPlay.Click += cmdPlay_Click;
             // 
             // frmPlayer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(356, 190);
-            this.Controls.Add(this.cmdPlay);
-            this.Controls.Add(this.txtName);
-            this.Controls.Add(this.label1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "frmPlayer";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Player";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(356, 190);
+            Controls.Add(cmdPlay);
+            Controls.Add(txtName);
+            Controls.Add(label1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Name = "frmPlayer";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Player";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
