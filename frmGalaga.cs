@@ -13,17 +13,31 @@ namespace pryValinotti
 {
     public partial class frmGalaga : Form
     {
-
+        // SCORE
         int score = 0;
+        clsScoreData scoreData = new clsScoreData();
+        int highscore;
 
+        // PLAYER
         clsPlayer player = new clsPlayer(new Point(153, 383));
+        string playerName;
+
+        // FLAGS
+        bool canUpgrade = true;
+        bool bossLoaded = false;
         bool playing = false;
         bool canMove = false;
         bool canShoot = false;
-        // Variable para la creacion de enemigos.
+
+        // Variables para la creacion de enemigos y movimiento de enemigos.
         int xPositionEnemy = 17; // Posicion inicial del primer enemigo
         int side = 1;
-        // Variable booleana para controlar que no se dispare antes de empezar a jugar
+
+        // BOSS
+        clsBoss boss;
+        int bossLoader = 0;
+        int bossLevel = 1;
+
         Random r = new Random();
 
         // Listas para controlar tanto enemigos como balas.
@@ -35,36 +49,81 @@ namespace pryValinotti
         {
             InitializeComponent();
             createEnemies();
-            this.Text += $" - {playerName}";
+            this.playerName = playerName;
+            this.Text += $" - {this.playerName}";
         }
 
-        private bool checkBulletCollision()
+        private void checkBulletCollision()
         {
-            foreach (clsEnemy enemy in enemies)
+            if (!bossLoaded)
+            {
+                List<clsEnemy> enemyCopy = new List<clsEnemy>(enemies);
+                foreach (clsEnemy enemy in enemyCopy)
+                {
+                    foreach (clsBullet bullet in bullets)
+                    {
+                        // Comprobación de rectángulos superpuestos (ajustados para el tamaño de la bala)
+                        if (bullet.pbBullet.Bounds.IntersectsWith(enemy.pbEnemy.Bounds))
+                        {
+                            score += enemy.level * 100;
+                            bossLoader += enemy.level * 100;
+                            lblScore.Text = score.ToString();
+                            enemy.pbEnemy.Dispose();
+                            bullet.pbBullet.Dispose();
+                            enemies.Remove(enemy);
+                            bullets.Remove(bullet);
+                            if(bossLoader > 2500)
+                            {
+                                bossLoaded = true;
+                                deleteBullets();
+                                deleteEnemies();
+                                boss = new clsBoss(bossLevel);
+                                boss.createBoss();
+                                this.Controls.Add(boss.pbBoss);
+                                bossLoader = 0;
+                            }
+                            break;
+                        }
+
+                    }
+                }
+            }
+            else
             {
                 foreach (clsBullet bullet in bullets)
                 {
                     // Comprobación de rectángulos superpuestos (ajustados para el tamaño de la bala)
-                    if (bullet.pbBullet.Bounds.IntersectsWith(enemy.pbEnemy.Bounds))
+                    if (bullet.pbBullet.Bounds.IntersectsWith(boss.pbBoss.Bounds))
                     {
-                        score += enemy.level * 100;
-                        lblScore.Text = score.ToString();
-                        enemy.pbEnemy.Dispose();
-                        bullet.pbBullet.Dispose();
-                        enemies.Remove(enemy);
-                        bullets.Remove(bullet);
-                        return true;
+                        boss.life -= 10;
+                        if(boss.life <= 0)
+                        {
+                            boss.pbBoss.Dispose();
+                            score += bossLevel * 2500;
+                            player.upgradeLevel();
+                            lblScore.Text = score.ToString();
+                            if(bossLevel < 4) bossLevel++;
+                            bossLoaded = false;
+                        }
+                        break;
                     }
                 }
             }
-            return false;
         }
 
-        private void restartGame()
+        private void deleteEnemies()
         {
-            score = 0;
-            lblScore.Text = score.ToString("D2");
-            // TODO: Si se supero el HighScore modificarlo.
+            List<clsEnemy> enemyCopy = new List<clsEnemy>(enemies);
+
+            foreach (clsEnemy enemy in enemyCopy)
+            {
+                enemies.Remove(enemy);
+                enemy.pbEnemy.Dispose();
+            }
+        }
+
+        private void deleteBullets()
+        {
             List<clsBullet> bulletsCopy = new List<clsBullet>(bullets);
             foreach (clsBullet bullet in bulletsCopy)
             {
@@ -78,13 +137,14 @@ namespace pryValinotti
                 bullets.Remove(bullet);
                 bullet.pbBullet.Dispose();
             }
-            List<clsEnemy> enemyCopy = new List<clsEnemy>(enemies);
-
-            foreach (clsEnemy enemy in enemyCopy)
-            {
-                enemies.Remove(enemy);
-                enemy.pbEnemy.Dispose();
-            }
+        }
+        private void restartGame()
+        {
+            score = 0;
+            lblScore.Text = score.ToString("D2");
+            player.restartLevel();
+            deleteBullets();
+            deleteEnemies();
             createEnemies();
             player.pbPlayer.Location = new Point(153, 383);
             lblJugar.Visible = true;
@@ -102,6 +162,12 @@ namespace pryValinotti
                     canShoot = false;
                     canMove = false;
                     clock.Stop();
+                    scoreData.addScore(this.playerName, this.score);
+                    if (score > highscore)
+                    {
+                        MessageBox.Show("NEW HIGHSCORE!!!");
+                        lblHighScore.Text = score.ToString();
+                    }
                     DialogResult result = MessageBox.Show("Perdiste :( \nVolver a Jugar? ", "Juego Terminado", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if(result == DialogResult.Yes)
                     {
@@ -113,6 +179,7 @@ namespace pryValinotti
                         bullets.Remove(ebullet);
                         this.Close();
                     }
+                    break;
                 }
             }
         }
@@ -224,12 +291,13 @@ namespace pryValinotti
                     ebullets.Add(eBullet);
                 }
             }
-            if (enemies.Count < 5) 
+            if (enemies.Count < 5 && !bossLoaded) 
             {
                 createEnemies();
                 if (r.Next(1, 51) == 1) createEnemies(); // 1 posibilidad entre 50 de crear dos filas de enemigos.
             }
             checkBulletCollision();
+            
             checkEBulletCollision();
             checkEnemyCollision();
             side += 1;
@@ -240,6 +308,10 @@ namespace pryValinotti
         {   
             player.createPlayer();
             this.Controls.Add(player.pbPlayer);
+            highscore = scoreData.getHighScore();
+            lblHighScore.Text = highscore.ToString();
         }
+
+
     }
 }

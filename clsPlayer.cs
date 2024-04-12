@@ -10,13 +10,16 @@ namespace pryValinotti
     public class clsPlayer
     {
         public Size playerSize = new Size(35,35);
-        private string image = "./assets/Galaga/Player.png";
+        public int level = 1;
+        public string image; 
         private Point playerLocation;
+        public int velocity = 15;
         public PictureBox pbPlayer = new PictureBox();
 
         public clsPlayer(Point location)
         {
             this.playerLocation = location;
+            this.image = $"./assets/Galaga/player{this.level}.png";
         }
 
         public void createPlayer()
@@ -31,7 +34,7 @@ namespace pryValinotti
         {
             if(direction == "left")
             {
-                pbPlayer.Location = new Point(pbPlayer.Location.X - 15, pbPlayer.Location.Y);
+                pbPlayer.Location = new Point(pbPlayer.Location.X - velocity, pbPlayer.Location.Y);
                 if (pbPlayer.Location.X < 0)
                 {
                     pbPlayer.Location = new Point(0, pbPlayer.Location.Y);
@@ -39,12 +42,31 @@ namespace pryValinotti
             }
             else if(direction == "right") 
             {
-                pbPlayer.Location = new Point(pbPlayer.Location.X + 15, pbPlayer.Location.Y);
+                pbPlayer.Location = new Point(pbPlayer.Location.X + velocity, pbPlayer.Location.Y);
                 if (pbPlayer.Location.X > 303)
                 {
                     pbPlayer.Location = new Point(303, pbPlayer.Location.Y);
                 }
             }
+        }
+
+        public void upgradeLevel()
+        {
+            if(this.level < 3)
+            {
+                this.level++;
+                this.image = $"./assets/Galaga/player{this.level}.png";
+                this.pbPlayer.Image = Image.FromFile(this.image);
+                this.velocity += 5;
+            }
+        }
+
+        public void restartLevel()
+        {
+            this.level = 1;
+            this.image = $"./assets/Galaga/player{this.level}.png";
+            this.pbPlayer.Image = Image.FromFile(this.image);
+            this.velocity = 15;
         }
 
     }
