@@ -72,11 +72,11 @@ namespace pryValinotti
                             bullet.pbBullet.Dispose();
                             enemies.Remove(enemy);
                             bullets.Remove(bullet);
-                            if(bossLoader > 2500)
+                            if(bossLoader > 25000)
                             {
-                                bossLoaded = true;
                                 deleteBullets();
                                 deleteEnemies();
+                                bossLoaded = true;
                                 boss = new clsBoss(bossLevel);
                                 boss.createBoss();
                                 this.Controls.Add(boss.pbBoss);
@@ -95,6 +95,8 @@ namespace pryValinotti
                     // Comprobación de rectángulos superpuestos (ajustados para el tamaño de la bala)
                     if (bullet.pbBullet.Bounds.IntersectsWith(boss.pbBoss.Bounds))
                     {
+                        bullet.pbBullet.Dispose();
+                        bullets.Remove(bullet);
                         boss.life -= 10;
                         if(boss.life <= 0)
                         {
@@ -102,7 +104,7 @@ namespace pryValinotti
                             score += bossLevel * 2500;
                             player.upgradeLevel();
                             lblScore.Text = score.ToString();
-                            if(bossLevel < 4) bossLevel++;
+                            if(bossLevel < 9) bossLevel++;
                             bossLoaded = false;
                         }
                         break;
@@ -145,19 +147,31 @@ namespace pryValinotti
             player.restartLevel();
             deleteBullets();
             deleteEnemies();
+            deleteBoss();
             createEnemies();
             player.pbPlayer.Location = new Point(153, 383);
             lblJugar.Visible = true;
         }
 
+        private void deleteBoss()
+        {
+            if(bossLoaded)
+            {
+                boss.pbBoss.Dispose();
+                bossLoaded = false;
+            }
+        }
+
         private void checkEBulletCollision()
         {
-
-            foreach (clsBullet ebullet in ebullets)
+            List<clsBullet> eBulletsCopy = new List<clsBullet>(ebullets);
+            foreach (clsBullet ebullet in eBulletsCopy)
             {
                 // Comprobación de rectángulos superpuestos (ajustados para el tamaño de la bala)
                 if (ebullet.pbBullet.Bounds.IntersectsWith(player.pbPlayer.Bounds))
                 {
+                    ebullet.pbBullet.Dispose();
+                    bullets.Remove(ebullet);
                     playing = false;
                     canShoot = false;
                     canMove = false;
@@ -175,29 +189,11 @@ namespace pryValinotti
                     }
                     else
                     {
-                        ebullet.pbBullet.Dispose();
-                        bullets.Remove(ebullet);
                         this.Close();
                     }
                     break;
                 }
             }
-        }
-
-        private bool checkEnemyCollision()
-        {
-            foreach (clsEnemy enemy in enemies)
-            {   
-                if (player.pbPlayer.Bounds.IntersectsWith(enemy.pbEnemy.Bounds))
-                {
-                    enemy.pbEnemy.Dispose();
-                    enemies.Remove(enemy);
-                    canShoot = false;
-                    canMove = false;
-                    return true;
-                }
-            }
-            return false;
         }
 
         public void createBullet()
@@ -235,7 +231,7 @@ namespace pryValinotti
             {
                 player.movePlayer("left");
             }
-            else if (e.KeyCode == Keys.Space && canShoot)
+            else if (e.KeyCode == Keys.D && canShoot)
             {
                 createBullet();
             }
@@ -291,15 +287,14 @@ namespace pryValinotti
                     ebullets.Add(eBullet);
                 }
             }
+            if(bossLoaded) boss.moveBoss(side);
             if (enemies.Count < 5 && !bossLoaded) 
             {
                 createEnemies();
                 if (r.Next(1, 51) == 1) createEnemies(); // 1 posibilidad entre 50 de crear dos filas de enemigos.
             }
             checkBulletCollision();
-            
             checkEBulletCollision();
-            checkEnemyCollision();
             side += 1;
             if (side == 8) side = -7;
         }

@@ -20,8 +20,17 @@ namespace pryValinotti
         public clsBoss(int bossLevel)
         {
             this.level = bossLevel;
-            this.image = $"./assets/Galaga/boss{this.level}.png";
-            this.life = this.level * 50 + 50;
+            if(bossLevel <= 8)
+            {
+                this.image = $"./assets/Galaga/boss{this.level}.png";
+                this.life = this.level * 50 + 50;
+            }
+            else
+            {
+                Random r = new Random();
+                this.image = $"./assets/Galaga/boss{r.Next(1,9)}.png";
+                this.life = 500;
+            }
         }
 
         public void createBoss()
@@ -30,6 +39,11 @@ namespace pryValinotti
             this.pbBoss.SizeMode = PictureBoxSizeMode.StretchImage;
             this.pbBoss.Image = Image.FromFile(this.image);
             this.pbBoss.Location = this.bossLocation;
+        }
+
+        public void moveBoss(int side)
+        {
+            pbBoss.Location = new Point(pbBoss.Location.X + side, pbBoss.Location.Y);
         }
     }
 }
