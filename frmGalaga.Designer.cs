@@ -36,6 +36,8 @@
             this.lblJugar = new System.Windows.Forms.Label();
             this.lblHighScore = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblLevel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // clock
@@ -98,12 +100,37 @@
             this.label3.TabIndex = 9;
             this.label3.Text = "HIGH SCORE";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("ArcadeClassic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.ForeColor = System.Drawing.Color.Red;
+            this.label2.Location = new System.Drawing.Point(269, 2);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(70, 21);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "LEVEL";
+            // 
+            // lblLevel
+            // 
+            this.lblLevel.AutoSize = true;
+            this.lblLevel.Font = new System.Drawing.Font("ArcadeClassic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblLevel.ForeColor = System.Drawing.Color.White;
+            this.lblLevel.Location = new System.Drawing.Point(290, 23);
+            this.lblLevel.Name = "lblLevel";
+            this.lblLevel.Size = new System.Drawing.Size(28, 18);
+            this.lblLevel.TabIndex = 12;
+            this.lblLevel.Text = "00";
+            // 
             // frmGalaga
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(340, 426);
+            this.Controls.Add(this.lblLevel);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.lblHighScore);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lblJugar);
@@ -131,5 +158,7 @@
         private Label lblJugar;
         private Label lblHighScore;
         private Label label3;
+        private Label label2;
+        private Label lblLevel;
     }
 }

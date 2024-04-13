@@ -20,11 +20,13 @@ namespace pryValinotti
 
         public void createBullet(string shooter)
         {
-            this.pbBullet.Size = bulletSize;
+            if(shooter != "b") this.pbBullet.Size = bulletSize;
+            else this.pbBullet.Size = new Size(38, 38);
             this.pbBullet.SizeMode = PictureBoxSizeMode.StretchImage;
             this.pbBullet.Image = Image.FromFile($"./assets/Galaga/{shooter}bullet.png");
             this.pbBullet.Location = this.bulletLocation;
         }
+
 
         public void Shoot(string shooter)
         {
@@ -32,9 +34,13 @@ namespace pryValinotti
             {
                 this.pbBullet.Location = new Point(pbBullet.Location.X, pbBullet.Location.Y - 10);
             }
-            else
+            else if (shooter == "e")
             {
                 this.pbBullet.Location = new Point(pbBullet.Location.X, pbBullet.Location.Y + 10);
+            }
+            else if (shooter == "b")
+            {
+                this.pbBullet.Location = new Point(pbBullet.Location.X, pbBullet.Location.Y + 15);
             }
         }
     }

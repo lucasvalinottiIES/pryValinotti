@@ -14,8 +14,6 @@ namespace pryValinotti
         String cadena;
         SQLiteConnection conexion;
         SQLiteCommand comando;
-        SQLiteDataAdapter adaptador;
-        DataTable tabla;
 
         public clsScoreData()
         {
@@ -28,12 +26,24 @@ namespace pryValinotti
         public int getHighScore() 
         {
             DataTable tabla = new DataTable();
-            string sql = $"SELECT max(Score) as HIGHSCORE FROM Scores Limit 1";
+            string sql = $"SELECT max(Score) as HIGHSCORE FROM Scores";
             SQLiteDataAdapter adaptador = new SQLiteDataAdapter(sql, cadena);
             adaptador.Fill(tabla);
-            DataRow scoreRow = tabla.Rows[0];
-            int score = Convert.ToInt32(scoreRow["HIGHSCORE"]);
-            return score;
+            try
+            {
+                if(tabla.Rows.Count > 0)
+                {
+                    DataRow scoreRow = tabla.Rows[0];
+                    int score = Convert.ToInt32(scoreRow["HIGHSCORE"]);
+                    return score;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+            return 0;
         }
 
         public void addScore(string player, int score)
