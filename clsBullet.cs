@@ -13,9 +13,16 @@ namespace pryValinotti
         private Point bulletLocation;
         public PictureBox pbBullet = new PictureBox();
 
-        public clsBullet(Point playerLocation, Size playerSize)
+        public clsBullet(Point playerLocation, Size playerSize, string shooter)
         {
-            this.bulletLocation = new Point(playerLocation.X + playerSize.Width / 2, playerLocation.Y);
+            if(shooter != "b") this.bulletLocation = new Point(playerLocation.X + playerSize.Width / 2, playerLocation.Y);
+            else
+            {
+                Random r = new Random();
+                int posX = r.Next(1, 3);
+                if (posX == 1) this.bulletLocation = new Point(playerLocation.X + 10, playerLocation.Y);
+                else this.bulletLocation = new Point(playerLocation.X + playerSize.Width / 2, playerLocation.Y);            
+            }
         }
 
         public void createBullet(string shooter)

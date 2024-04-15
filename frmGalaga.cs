@@ -23,7 +23,6 @@ namespace pryValinotti
         string playerName;
 
         // FLAGS
-        bool canUpgrade = true;
         bool bossLoaded = false;
         bool playing = false;
         bool canMove = false;
@@ -115,6 +114,40 @@ namespace pryValinotti
             }
         }
 
+        private void checkBossBulletCollision()
+        {
+            List<clsBullet> bBulletsCopy = new List<clsBullet>(bbullets);
+            foreach (clsBullet bbullet in bBulletsCopy)
+            {
+                // Comprobación de rectángulos superpuestos (ajustados para el tamaño de la bala)
+                if (bbullet.pbBullet.Bounds.IntersectsWith(player.pbPlayer.Bounds))
+                {
+                    bbullet.pbBullet.Dispose();
+                    bbullets.Remove(bbullet);
+                    playing = false;
+                    canShoot = false;
+                    canMove = false;
+                    clock.Stop();
+                    scoreData.addScore(this.playerName, this.score);
+                    if (score > highscore)
+                    {
+                        MessageBox.Show("NEW HIGHSCORE!!!");
+                        lblHighScore.Text = score.ToString();
+                    }
+                    DialogResult result = MessageBox.Show($"Perdiste :( \nVolver a Jugar?\n", "Juego Terminado", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (result == DialogResult.Yes)
+                    {
+                        restartGame();
+                    }
+                    else
+                    {
+                        this.Close();
+                    }
+                    break;
+                }
+            }
+        }
+
         private void deleteEnemies()
         {
             List<clsEnemy> enemyCopy = new List<clsEnemy>(enemies);
@@ -141,11 +174,22 @@ namespace pryValinotti
                 ebullets.Remove(bullet);
                 bullet.pbBullet.Dispose();
             }
+
+            List<clsBullet> bbulletsCopy = new List<clsBullet>(bbullets);
+
+            foreach (clsBullet bullet in bbulletsCopy)
+            {
+                bbullets.Remove(bullet);
+                bullet.pbBullet.Dispose();
+            }
         }
+
         private void restartGame()
         {
             score = 0;
             lblScore.Text = score.ToString("D2");
+            bossLevel = 1;
+            lblLevel.Text = bossLevel.ToString("D2");
             player.restartLevel();
             deleteBullets();
             deleteEnemies();
@@ -188,7 +232,6 @@ namespace pryValinotti
                     if(result == DialogResult.Yes)
                     {
                         restartGame();
-                        MessageBox.Show(ebullets.Count.ToString());
                     }
                     else
                     {
@@ -201,7 +244,7 @@ namespace pryValinotti
 
         public void createBullet()
         {
-            clsBullet bullet = new clsBullet(player.pbPlayer.Location, player.playerSize);
+            clsBullet bullet = new clsBullet(player.pbPlayer.Location, player.playerSize,"p");
             bullet.createBullet("p");
             this.Controls.Add(bullet.pbBullet);
             bullets.Add(bullet);
@@ -299,7 +342,7 @@ namespace pryValinotti
                 enemy.moveEnemy(side);
                 if(r.Next(1,201) == 1) // Una posibilidad entre 200 de disparar
                 {
-                    clsBullet eBullet = new clsBullet(enemy.enemyLocation, enemy.enemySize);
+                    clsBullet eBullet = new clsBullet(enemy.enemyLocation, enemy.enemySize, "e");
                     eBullet.createBullet("e");
                     this.Controls.Add(eBullet.pbBullet);
                     ebullets.Add(eBullet);
@@ -309,12 +352,13 @@ namespace pryValinotti
             {
                 if(r.Next(1,51) == 1)
                 {
-                    clsBullet bBullet = new clsBullet(boss.bossLocation, boss.bossSize);
+                    clsBullet bBullet = new clsBullet(boss.bossLocation, boss.bossSize, "b");
                     bBullet.createBullet("b");
                     this.Controls.Add(bBullet.pbBullet);
                     bbullets.Add(bBullet);
                 }
                 boss.moveBoss(side);
+                checkBossBulletCollision();
             }
             if (enemies.Count < 5 && !bossLoaded) 
             {
