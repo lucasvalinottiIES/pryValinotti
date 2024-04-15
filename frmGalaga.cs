@@ -53,6 +53,98 @@ namespace pryValinotti
             this.Text += $" - {this.playerName}";
         }
 
+        #region Iniciar y reiniciar el juego
+        private void frmGalaga_Load(object sender, EventArgs e)
+        {   
+            player.createPlayer();
+            this.Controls.Add(player.pbPlayer);
+            highscore = scoreData.getHighScore();
+            lblHighScore.Text = highscore.ToString("D2");
+            lblLevel.Text = bossLevel.ToString("D2");
+        }
+        private void restartGame()
+        {
+            score = 0;
+            lblScore.Text = score.ToString("D2");
+            bossLevel = 1;
+            lblLevel.Text = bossLevel.ToString("D2");
+            bossLoader = 0;
+            player.restartLevel();
+            deleteBullets();
+            deleteEnemies();
+            deleteBoss();
+            createEnemies();
+            player.pbPlayer.Location = new Point(153, 383);
+            lblJugar.Visible = true;
+        }
+        #endregion
+
+        #region Crear balas y Enemigos
+        public void createBullet()
+        {
+            clsBullet bullet = new clsBullet(player.pbPlayer.Location, player.playerSize,"p");
+            bullet.createBullet("p");
+            this.Controls.Add(bullet.pbBullet);
+            bullets.Add(bullet);
+        }
+
+        public void createEnemies()
+        {
+            foreach (clsEnemy enemy in enemies)
+            {
+                enemy.moveEnemy();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+            }
+            xPositionEnemy = 17;
+            for (int i = 0; i < 7; i++)
+            {
+                clsEnemy enemy = new clsEnemy(new Point(xPositionEnemy,50));
+                enemy.createEnemy();
+                this.Controls.Add(enemy.pbEnemy);
+                xPositionEnemy += (enemy.enemySize.Width + 10);
+                enemies.Add(enemy);
+            }  
+        }
+
+        public void createBoss()
+        {
+            bossLoaded = true;
+            boss = new clsBoss(bossLevel);
+            boss.createBoss();
+            this.Controls.Add(boss.pbBoss);
+            bossLoader = 0;
+        }
+        #endregion
+
+        #region Capturar Teclas
+        private void frmGalaga_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Right && canMove)
+            {
+                player.movePlayer("right");
+            }
+            else if (e.KeyCode == Keys.Left && canMove)
+            {
+                player.movePlayer("left");
+            }
+            else if (e.KeyCode == Keys.D && canShoot)
+            {
+                createBullet();
+            }
+            else if (e.KeyCode == Keys.Enter)
+            {
+                if(!playing)
+                {
+                    lblJugar.Visible = false;
+                    playing = true;
+                    canShoot = true;
+                    canMove = true;
+                    clock.Start();
+                }
+            }
+        }
+        #endregion
+
+        #region Colisiones de Balas
         private void checkBulletCollision()
         {
             if (!bossLoaded)
@@ -72,15 +164,11 @@ namespace pryValinotti
                             bullet.pbBullet.Dispose();
                             enemies.Remove(enemy);
                             bullets.Remove(bullet);
-                            if(bossLoader > 20000)
+                            if (bossLoader > 15000)
                             {
                                 deleteBullets();
                                 deleteEnemies();
-                                bossLoaded = true;
-                                boss = new clsBoss(bossLevel);
-                                boss.createBoss();
-                                this.Controls.Add(boss.pbBoss);
-                                bossLoader = 0;
+                                createBoss();
                             }
                             break;
                         }
@@ -148,6 +236,42 @@ namespace pryValinotti
             }
         }
 
+        private void checkEnemyBulletCollision()
+        {
+            List<clsBullet> eBulletsCopy = new List<clsBullet>(ebullets);
+            foreach (clsBullet ebullet in eBulletsCopy)
+            {
+                // Comprobación de rectángulos superpuestos (ajustados para el tamaño de la bala)
+                if (ebullet.pbBullet.Bounds.IntersectsWith(player.pbPlayer.Bounds))
+                {
+                    ebullet.pbBullet.Dispose();
+                    ebullets.Remove(ebullet);
+                    playing = false;
+                    canShoot = false;
+                    canMove = false;
+                    clock.Stop();
+                    scoreData.addScore(this.playerName, this.score);
+                    if (score > highscore)
+                    {
+                        MessageBox.Show("NEW HIGHSCORE!!!");
+                        lblHighScore.Text = score.ToString();
+                    }
+                    DialogResult result = MessageBox.Show($"Perdiste :( \nVolver a Jugar?\n", "Juego Terminado", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if(result == DialogResult.Yes)
+                    {
+                        restartGame();
+                    }
+                    else
+                    {
+                        this.Close();
+                    }
+                    break;
+                }
+            }
+        }
+        #endregion
+
+        #region Borrar enemigos y balas
         private void deleteEnemies()
         {
             List<clsEnemy> enemyCopy = new List<clsEnemy>(enemies);
@@ -184,116 +308,18 @@ namespace pryValinotti
             }
         }
 
-        private void restartGame()
-        {
-            score = 0;
-            lblScore.Text = score.ToString("D2");
-            bossLevel = 1;
-            lblLevel.Text = bossLevel.ToString("D2");
-            player.restartLevel();
-            deleteBullets();
-            deleteEnemies();
-            deleteBoss();
-            createEnemies();
-            player.pbPlayer.Location = new Point(153, 383);
-            lblJugar.Visible = true;
-        }
-
         private void deleteBoss()
         {
             if(bossLoaded)
             {
                 boss.pbBoss.Dispose();
+                deleteBullets();
                 bossLoaded = false;
             }
         }
+        #endregion
 
-        private void checkEBulletCollision()
-        {
-            List<clsBullet> eBulletsCopy = new List<clsBullet>(ebullets);
-            foreach (clsBullet ebullet in eBulletsCopy)
-            {
-                // Comprobación de rectángulos superpuestos (ajustados para el tamaño de la bala)
-                if (ebullet.pbBullet.Bounds.IntersectsWith(player.pbPlayer.Bounds))
-                {
-                    ebullet.pbBullet.Dispose();
-                    ebullets.Remove(ebullet);
-                    playing = false;
-                    canShoot = false;
-                    canMove = false;
-                    clock.Stop();
-                    scoreData.addScore(this.playerName, this.score);
-                    if (score > highscore)
-                    {
-                        MessageBox.Show("NEW HIGHSCORE!!!");
-                        lblHighScore.Text = score.ToString();
-                    }
-                    DialogResult result = MessageBox.Show($"Perdiste :( \nVolver a Jugar?\n", "Juego Terminado", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    if(result == DialogResult.Yes)
-                    {
-                        restartGame();
-                    }
-                    else
-                    {
-                        this.Close();
-                    }
-                    break;
-                }
-            }
-        }
-
-        public void createBullet()
-        {
-            clsBullet bullet = new clsBullet(player.pbPlayer.Location, player.playerSize,"p");
-            bullet.createBullet("p");
-            this.Controls.Add(bullet.pbBullet);
-            bullets.Add(bullet);
-        }
-
-        public void createEnemies()
-        {
-            foreach (clsEnemy enemy in enemies)
-            {
-                enemy.moveEnemy();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-            }
-            xPositionEnemy = 17;
-            for (int i = 0; i < 7; i++)
-            {
-                clsEnemy enemy = new clsEnemy(new Point(xPositionEnemy,50));
-                enemy.createEnemy();
-                this.Controls.Add(enemy.pbEnemy);
-                xPositionEnemy += (enemy.enemySize.Width + 10);
-                enemies.Add(enemy);
-            }  
-        }
-
-        private void frmGalaga_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Right && canMove)
-            {
-                player.movePlayer("right");
-            }
-            else if (e.KeyCode == Keys.Left && canMove)
-            {
-                player.movePlayer("left");
-            }
-            else if (e.KeyCode == Keys.D && canShoot)
-            {
-                createBullet();
-            }
-            else if (e.KeyCode == Keys.Enter)
-            {
-                if(!playing)
-                {
-                    lblJugar.Visible = false;
-                    playing = true;
-                    canShoot = true;
-                    canMove = true;
-                    clock.Start();
-                }
-            }
-        }
-
+        #region Clock
         private void clock_Tick(object sender, EventArgs e)
         {
             List<clsBullet> bulletsCopy = new List<clsBullet>(bullets);
@@ -307,50 +333,60 @@ namespace pryValinotti
                     bullet.pbBullet.Dispose();
                 }
             }
-            List<clsBullet> ebulletsCopy = new List<clsBullet>(ebullets);
 
-            foreach (clsBullet bullet in ebulletsCopy)
+            if(!bossLoaded)
             {
-                bullet.Shoot("e");
+                List<clsBullet> ebulletsCopy = new List<clsBullet>(ebullets);
 
-                if (bullet.pbBullet.Location.Y > 465)
+                foreach (clsBullet bullet in ebulletsCopy)
                 {
-                    // Elimina la bala de la lista original
-                    ebullets.Remove(bullet);
+                    bullet.Shoot("e");
 
-                    // Libera la memoria del control PictureBox
-                    bullet.pbBullet.Dispose();
+                    if (bullet.pbBullet.Location.Y > 465)
+                    {
+                        // Elimina la bala de la lista original
+                        ebullets.Remove(bullet);
+
+                        // Libera la memoria del control PictureBox
+                        bullet.pbBullet.Dispose();
+                    }
                 }
-            }
-            List<clsBullet> bbulletsCopy = new List<clsBullet>(bbullets);
-
-            foreach (clsBullet bullet in bbulletsCopy)
-            {
-                bullet.Shoot("b");
-
-                if (bullet.pbBullet.Location.Y > 465)
+                if (enemies.Count < 5)
                 {
-                    // Elimina la bala de la lista original
-                    bbullets.Remove(bullet);
-
-                    // Libera la memoria del control PictureBox
-                    bullet.pbBullet.Dispose();
+                    createEnemies();
+                    if (r.Next(1, 51) == 1) createEnemies(); // 1 posibilidad entre 50 de crear dos filas de enemigos.
                 }
-            }
-            foreach (clsEnemy enemy in enemies)
-            {
-                enemy.moveEnemy(side);
-                if(r.Next(1,201) == 1) // Una posibilidad entre 200 de disparar
+                foreach (clsEnemy enemy in enemies)
                 {
-                    clsBullet eBullet = new clsBullet(enemy.enemyLocation, enemy.enemySize, "e");
-                    eBullet.createBullet("e");
-                    this.Controls.Add(eBullet.pbBullet);
-                    ebullets.Add(eBullet);
-                }
+                    enemy.moveEnemy(side);
+                    if (r.Next(1, 201) == 1) // Una posibilidad entre 200 de disparar
+                    {
+                        clsBullet eBullet = new clsBullet(enemy.enemyLocation, enemy.enemySize, "e");
+                        eBullet.createBullet("e");
+                        this.Controls.Add(eBullet.pbBullet);
+                        ebullets.Add(eBullet);
+                    }
+                }    
+                checkEnemyBulletCollision();
             }
-            if (bossLoaded)
+            else
             {
-                if(r.Next(1,51) == 1)
+                List<clsBullet> bbulletsCopy = new List<clsBullet>(bbullets);
+
+                foreach (clsBullet bullet in bbulletsCopy)
+                {
+                    bullet.Shoot("b");
+
+                    if (bullet.pbBullet.Location.Y > 465)
+                    {
+                        // Elimina la bala de la lista original
+                        bbullets.Remove(bullet);
+
+                        // Libera la memoria del control PictureBox
+                        bullet.pbBullet.Dispose();
+                    }
+                }
+                if (r.Next(1, 51) == 1)
                 {
                     clsBullet bBullet = new clsBullet(boss.bossLocation, boss.bossSize, "b");
                     bBullet.createBullet("b");
@@ -360,26 +396,10 @@ namespace pryValinotti
                 boss.moveBoss(side);
                 checkBossBulletCollision();
             }
-            if (enemies.Count < 5 && !bossLoaded) 
-            {
-                createEnemies();
-                if (r.Next(1, 51) == 1) createEnemies(); // 1 posibilidad entre 50 de crear dos filas de enemigos.
-            }
             checkBulletCollision();
-            checkEBulletCollision();
             side += 1;
             if (side == 8) side = -7;
         }
-
-        private void frmGalaga_Load(object sender, EventArgs e)
-        {   
-            player.createPlayer();
-            this.Controls.Add(player.pbPlayer);
-            highscore = scoreData.getHighScore();
-            lblHighScore.Text = highscore.ToString("D2");
-            lblLevel.Text = bossLevel.ToString("D2");
-        }
-
-
+        #endregion
     }
 }
