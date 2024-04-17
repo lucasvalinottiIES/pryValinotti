@@ -38,6 +38,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblLevel = new System.Windows.Forms.Label();
+            this.lblPlayer = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // clock
@@ -122,13 +123,25 @@
             this.lblLevel.TabIndex = 12;
             this.lblLevel.Text = "00";
             // 
+            // lblPlayer
+            // 
+            this.lblPlayer.AutoSize = true;
+            this.lblPlayer.Font = new System.Drawing.Font("ArcadeClassic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblPlayer.ForeColor = System.Drawing.Color.Red;
+            this.lblPlayer.Location = new System.Drawing.Point(12, 435);
+            this.lblPlayer.Name = "lblPlayer";
+            this.lblPlayer.Size = new System.Drawing.Size(82, 21);
+            this.lblPlayer.TabIndex = 13;
+            this.lblPlayer.Text = "PLAYER";
+            // 
             // frmGalaga
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(340, 426);
+            this.ClientSize = new System.Drawing.Size(340, 465);
+            this.Controls.Add(this.lblPlayer);
             this.Controls.Add(this.lblLevel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblHighScore);
@@ -137,7 +150,7 @@
             this.Controls.Add(this.lblScore);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("ArcadeClassic", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
@@ -160,5 +173,6 @@
         private Label label3;
         private Label label2;
         private Label lblLevel;
+        private Label lblPlayer;
     }
 }

@@ -61,6 +61,7 @@ namespace pryValinotti
             highscore = scoreData.getHighScore();
             lblHighScore.Text = highscore.ToString("D2");
             lblLevel.Text = bossLevel.ToString("D2");
+            lblPlayer.Text = playerName;
         }
         private void restartGame()
         {
@@ -140,6 +141,9 @@ namespace pryValinotti
                     canMove = true;
                     clock.Start();
                 }
+            }else if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
             }
         }
         #endregion
@@ -188,13 +192,12 @@ namespace pryValinotti
                         boss.life -= 10;
                         if(boss.life <= 0)
                         {
-                            boss.pbBoss.Dispose();
+                            deleteBoss();
                             score += bossLevel * 2500;
                             if(bossLevel == 2 || bossLevel == 4) player.upgradeLevel();
                             lblScore.Text = score.ToString();
                             bossLevel++;
                             lblLevel.Text = bossLevel.ToString("D2");
-                            bossLoaded = false;
                         }
                         break;
                     }
@@ -219,10 +222,10 @@ namespace pryValinotti
                     scoreData.addScore(this.playerName, this.score);
                     if (score > highscore)
                     {
-                        MessageBox.Show("NEW HIGHSCORE!!!");
+                        MessageBox.Show("NEW HIGHSCORE!!!", $"{playerName} - Juego Terminado");
                         lblHighScore.Text = score.ToString();
                     }
-                    DialogResult result = MessageBox.Show($"Perdiste :( \nVolver a Jugar?\n", "Juego Terminado", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    DialogResult result = MessageBox.Show($"Perdiste :( \nVolver a Jugar?\n", $"{playerName} - Juego Terminado", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (result == DialogResult.Yes)
                     {
                         restartGame();
@@ -253,10 +256,10 @@ namespace pryValinotti
                     scoreData.addScore(this.playerName, this.score);
                     if (score > highscore)
                     {
-                        MessageBox.Show("NEW HIGHSCORE!!!");
+                        MessageBox.Show("NEW HIGHSCORE!!!", $"{playerName} - Juego Terminado");
                         lblHighScore.Text = score.ToString();
                     }
-                    DialogResult result = MessageBox.Show($"Perdiste :( \nVolver a Jugar?\n", "Juego Terminado", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    DialogResult result = MessageBox.Show($"Perdiste :( \nVolver a Jugar?\n", $"{playerName} - Juego Terminado", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if(result == DialogResult.Yes)
                     {
                         restartGame();
@@ -386,7 +389,7 @@ namespace pryValinotti
                         bullet.pbBullet.Dispose();
                     }
                 }
-                if (r.Next(1, 51) == 1)
+                if (r.Next(1, 101) == 1)
                 {
                     clsBullet bBullet = new clsBullet(boss.bossLocation, boss.bossSize, "b");
                     bBullet.createBullet("b");
