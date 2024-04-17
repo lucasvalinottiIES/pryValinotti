@@ -25,6 +25,7 @@ namespace pryValinotti
             {
                 frmPrincipal frm = new frmPrincipal();
                 frm.ShowDialog();
+                this.Close();
             }
             else
             {
