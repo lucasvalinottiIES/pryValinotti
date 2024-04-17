@@ -28,149 +28,138 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.gbHerramientas = new System.Windows.Forms.GroupBox();
-            this.cmdGuardar = new System.Windows.Forms.Button();
-            this.nudGrosor = new System.Windows.Forms.NumericUpDown();
-            this.lblGrosor = new System.Windows.Forms.Label();
-            this.cmdColor = new System.Windows.Forms.Button();
-            this.gbDibujo = new System.Windows.Forms.GroupBox();
-            this.pbDibujo = new System.Windows.Forms.PictureBox();
-            this.cdColor = new System.Windows.Forms.ColorDialog();
-            this.pbColor = new System.Windows.Forms.PictureBox();
-            this.gbHerramientas.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudGrosor)).BeginInit();
-            this.gbDibujo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbDibujo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbColor)).BeginInit();
-            this.SuspendLayout();
+            gbHerramientas = new GroupBox();
+            nudGrosor = new NumericUpDown();
+            label1 = new Label();
+            cmdBorrar = new Button();
+            pbColor = new PictureBox();
+            cmdGuardar = new Button();
+            gbDibujo = new GroupBox();
+            pbDibujo = new PictureBox();
+            cdColor = new ColorDialog();
+            gbHerramientas.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nudGrosor).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbColor).BeginInit();
+            gbDibujo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbDibujo).BeginInit();
+            SuspendLayout();
             // 
             // gbHerramientas
             // 
-            this.gbHerramientas.Controls.Add(this.pbColor);
-            this.gbHerramientas.Controls.Add(this.cmdGuardar);
-            this.gbHerramientas.Controls.Add(this.nudGrosor);
-            this.gbHerramientas.Controls.Add(this.lblGrosor);
-            this.gbHerramientas.Controls.Add(this.cmdColor);
-            this.gbHerramientas.Location = new System.Drawing.Point(12, 12);
-            this.gbHerramientas.Name = "gbHerramientas";
-            this.gbHerramientas.Size = new System.Drawing.Size(142, 426);
-            this.gbHerramientas.TabIndex = 0;
-            this.gbHerramientas.TabStop = false;
-            this.gbHerramientas.Text = "Herramientas";
-            // 
-            // cmdGuardar
-            // 
-            this.cmdGuardar.Location = new System.Drawing.Point(16, 397);
-            this.cmdGuardar.Name = "cmdGuardar";
-            this.cmdGuardar.Size = new System.Drawing.Size(109, 23);
-            this.cmdGuardar.TabIndex = 0;
-            this.cmdGuardar.Text = "Guardar Dibujo";
-            this.cmdGuardar.UseVisualStyleBackColor = true;
+            gbHerramientas.Controls.Add(nudGrosor);
+            gbHerramientas.Controls.Add(label1);
+            gbHerramientas.Controls.Add(cmdBorrar);
+            gbHerramientas.Controls.Add(pbColor);
+            gbHerramientas.Controls.Add(cmdGuardar);
+            gbHerramientas.Location = new Point(12, 12);
+            gbHerramientas.Name = "gbHerramientas";
+            gbHerramientas.Size = new Size(142, 426);
+            gbHerramientas.TabIndex = 0;
+            gbHerramientas.TabStop = false;
+            gbHerramientas.Text = "Herramientas";
             // 
             // nudGrosor
             // 
-            this.nudGrosor.Location = new System.Drawing.Point(16, 170);
-            this.nudGrosor.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.nudGrosor.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudGrosor.Name = "nudGrosor";
-            this.nudGrosor.Size = new System.Drawing.Size(109, 23);
-            this.nudGrosor.TabIndex = 0;
-            this.nudGrosor.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            nudGrosor.Location = new Point(7, 160);
+            nudGrosor.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
+            nudGrosor.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            nudGrosor.Name = "nudGrosor";
+            nudGrosor.Size = new Size(120, 23);
+            nudGrosor.TabIndex = 1;
+            nudGrosor.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
-            // lblGrosor
+            // label1
             // 
-            this.lblGrosor.AutoSize = true;
-            this.lblGrosor.Location = new System.Drawing.Point(16, 152);
-            this.lblGrosor.Name = "lblGrosor";
-            this.lblGrosor.Size = new System.Drawing.Size(79, 15);
-            this.lblGrosor.TabIndex = 0;
-            this.lblGrosor.Text = "Grosor (1-10):";
+            label1.AutoSize = true;
+            label1.Location = new Point(6, 25);
+            label1.Name = "label1";
+            label1.Size = new Size(99, 15);
+            label1.TabIndex = 1;
+            label1.Text = "Seleccionar Color";
             // 
-            // cmdColor
+            // cmdBorrar
             // 
-            this.cmdColor.Location = new System.Drawing.Point(16, 39);
-            this.cmdColor.Name = "cmdColor";
-            this.cmdColor.Size = new System.Drawing.Size(109, 23);
-            this.cmdColor.TabIndex = 0;
-            this.cmdColor.Text = "Seleccionar Color";
-            this.cmdColor.UseVisualStyleBackColor = true;
-            this.cmdColor.Click += new System.EventHandler(this.cmdColor_Click);
-            // 
-            // gbDibujo
-            // 
-            this.gbDibujo.Controls.Add(this.pbDibujo);
-            this.gbDibujo.Location = new System.Drawing.Point(160, 12);
-            this.gbDibujo.Name = "gbDibujo";
-            this.gbDibujo.Size = new System.Drawing.Size(628, 426);
-            this.gbDibujo.TabIndex = 1;
-            this.gbDibujo.TabStop = false;
-            this.gbDibujo.Text = "Dibujo";
-            // 
-            // pbDibujo
-            // 
-            this.pbDibujo.BackColor = System.Drawing.Color.White;
-            this.pbDibujo.Location = new System.Drawing.Point(6, 22);
-            this.pbDibujo.Name = "pbDibujo";
-            this.pbDibujo.Size = new System.Drawing.Size(616, 398);
-            this.pbDibujo.TabIndex = 0;
-            this.pbDibujo.TabStop = false;
-            // 
-            // cdColor
-            // 
-            this.cdColor.FullOpen = true;
+            cmdBorrar.Location = new Point(16, 368);
+            cmdBorrar.Name = "cmdBorrar";
+            cmdBorrar.Size = new Size(109, 23);
+            cmdBorrar.TabIndex = 2;
+            cmdBorrar.Text = "Borrar Lienzo";
+            cmdBorrar.UseVisualStyleBackColor = true;
+            cmdBorrar.Click += cmdBorrar_Click;
             // 
             // pbColor
             // 
-            this.pbColor.BackColor = System.Drawing.Color.Black;
-            this.pbColor.Location = new System.Drawing.Point(16, 68);
-            this.pbColor.Name = "pbColor";
-            this.pbColor.Size = new System.Drawing.Size(109, 53);
-            this.pbColor.TabIndex = 1;
-            this.pbColor.TabStop = false;
+            pbColor.BackColor = Color.Black;
+            pbColor.Cursor = Cursors.Hand;
+            pbColor.Location = new Point(7, 43);
+            pbColor.Name = "pbColor";
+            pbColor.Size = new Size(109, 53);
+            pbColor.TabIndex = 1;
+            pbColor.TabStop = false;
+            pbColor.Click += pbColor_Click;
+            // 
+            // cmdGuardar
+            // 
+            cmdGuardar.Location = new Point(16, 397);
+            cmdGuardar.Name = "cmdGuardar";
+            cmdGuardar.Size = new Size(109, 23);
+            cmdGuardar.TabIndex = 0;
+            cmdGuardar.Text = "Guardar";
+            cmdGuardar.UseVisualStyleBackColor = true;
+            cmdGuardar.Click += cmdGuardar_Click;
+            // 
+            // gbDibujo
+            // 
+            gbDibujo.Controls.Add(pbDibujo);
+            gbDibujo.Location = new Point(160, 12);
+            gbDibujo.Name = "gbDibujo";
+            gbDibujo.Size = new Size(628, 426);
+            gbDibujo.TabIndex = 1;
+            gbDibujo.TabStop = false;
+            gbDibujo.Text = "Dibujo";
+            // 
+            // pbDibujo
+            // 
+            pbDibujo.BackColor = Color.White;
+            pbDibujo.Cursor = Cursors.Cross;
+            pbDibujo.Location = new Point(6, 22);
+            pbDibujo.Name = "pbDibujo";
+            pbDibujo.Size = new Size(616, 398);
+            pbDibujo.TabIndex = 0;
+            pbDibujo.TabStop = false;
+            pbDibujo.MouseDown += pbDibujo_MouseDown;
+            pbDibujo.MouseMove += pbDibujo_MouseMove;
             // 
             // frmFirma
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.gbDibujo);
-            this.Controls.Add(this.gbHerramientas);
-            this.Name = "frmFirma";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Firma";
-            this.gbHerramientas.ResumeLayout(false);
-            this.gbHerramientas.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudGrosor)).EndInit();
-            this.gbDibujo.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbDibujo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbColor)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(224, 224, 224);
+            ClientSize = new Size(800, 450);
+            Controls.Add(gbDibujo);
+            Controls.Add(gbHerramientas);
+            Name = "frmFirma";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Firma";
+            gbHerramientas.ResumeLayout(false);
+            gbHerramientas.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)nudGrosor).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbColor).EndInit();
+            gbDibujo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pbDibujo).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
 
         private GroupBox gbHerramientas;
-        private NumericUpDown nudGrosor;
-        private Label lblGrosor;
-        private Button cmdColor;
         private GroupBox gbDibujo;
         private Button cmdGuardar;
         private PictureBox pbDibujo;
         private ColorDialog cdColor;
         private PictureBox pbColor;
+        private Button cmdBorrar;
+        private Label label1;
+        private NumericUpDown nudGrosor;
     }
 }
