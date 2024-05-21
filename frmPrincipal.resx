@@ -383,7 +383,7 @@
   <data name="cmdGalaga.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wQAADsEBuJFr7QAAAIZJREFUOE/FjlEOgCAMQzmup+YquBILZZuS8KPJA9Z2jcW+9katNdUdqdj5twDL
+        wAAADsABataJCQAAAIZJREFUOE/FjlEOgCAMQzmup+YquBILZZuS8KPJA9Z2jcW+9katNdUdqdj5twDL
         JPOFVDwrsGO8swL1hTnYMd5HBQzrMlF/wc4x9MA1l+DxTZ1ZeKHALxMtCQXayiBAQG+i2aVAQztCgcec
         z5mEAggIZwXA/+lS0IcnCBj2GvWlgIZn75V2AzN09ph20C60AAAAAElFTkSuQmCC
 </value>
@@ -391,7 +391,7 @@
   <data name="cmdMonstruarioMySQL.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAYAAAB5fY51AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wgAADsIBFShKgAAANB1JREFUeF7tnWmUFdW591k3ycrNXVn5cuPX+8Xcm5Uvyfvq+943N+YOied008QJ
+        wQAADsEBuJFr7QAANB1JREFUeF7tnWmUFdW591k3ycrNXVn5cuPX+8Xcm5Uvyfvq+943N+YOied008QJ
         I3GKY9SYOMQxeuqchtNNA40DCk6ggp46DTaNigLOAk4oKoOCCIKIDIoIMoiADFLv/tfZZVeffk5Vnbnq
         nP9/rd+9pmvvXXWq9n6ovevZzzOEovI1fGzmn1vapx/fYvS0xZPmebGkeU2LYXbFDfO+uJGZFTMyC2IJ
         c1nMMFep//5Q/W1TPGFuU/+9S/19v/rvIwD/jb/hGMqgrF3HrptZgLbQJtrGOXAunBPnxjXoy6Eoqpk1
@@ -917,7 +917,7 @@
   <data name="cmdJuegoRol.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wgAADsIBFShKgAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAGvsSURBVHhe7d0H
+        wQAADsEBuJFr7QAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAGvsSURBVHhe7d0H
         dFZV9jbwIZWEEAgtEEIPLfQSIPQmKKCACEgHARGkKqKIgIIiFkC6DeyKCINiAbFQRMXeK+qMM+MUx7GN
         fb75n2/vd3w1xB24ue2ce+/zrPVba9YAyX3Pfb1733bO7xAEQZDIpgGZSK4hvyevkX+Qz8kPRP3sy5//
         v7g/kg+LeJW8WMQB8lgR95PtRdxKbijiOrKyiEvJhUXMJWcXwds8vIghpG8RPUm7IlqT+kXUJVlFVCQI

@@ -100,6 +100,7 @@
             this.cmdMonstruarioAPI.Name = "cmdMonstruarioAPI";
             this.cmdMonstruarioAPI.Size = new System.Drawing.Size(180, 22);
             this.cmdMonstruarioAPI.Text = "Monstruario API";
+            this.cmdMonstruarioAPI.Click += new System.EventHandler(this.cmdMonstruarioAPI_Click);
             // 
             // cmdJuegoRol
             // 

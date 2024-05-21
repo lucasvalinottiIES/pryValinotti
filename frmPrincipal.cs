@@ -34,5 +34,11 @@ namespace pryValinotti
             frmMonstruarioMySQL frm = new frmMonstruarioMySQL();
             frm.ShowDialog();
         }
+
+        private void cmdMonstruarioAPI_Click(object sender, EventArgs e)
+        {
+            frmMonstruarioAPI frm = new frmMonstruarioAPI();
+            frm.ShowDialog();
+        }
     }
 }

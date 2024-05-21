@@ -13,7 +13,6 @@ namespace pryValinotti
     {
         string cadena = "Server=localhost;Database=dbmonstruos;Uid=root;Pwd=;";
         MySqlConnection conexion;
-        MySqlCommand comando;
         MySqlDataAdapter adaptador;
 
         public clsMySQL()
@@ -23,59 +22,88 @@ namespace pryValinotti
 
         public void listarTipos(TreeView arbol)
         {
-            string consulta = "SELECT type FROM monstruario WHERE type != '' GROUP BY type";
-            DataTable tabla = new DataTable();
-            adaptador = new MySqlDataAdapter(consulta, cadena);
-            adaptador.Fill(tabla);
-            TreeNode raiz = arbol.Nodes.Add("Tipos");
-            foreach (DataRow tipo in tabla.Rows)
+            try
             {
-                TreeNode hijo = raiz.Nodes.Add(tipo["type"].ToString());
-                string tipoMonstruo = tipo["type"].ToString();
-                listarNombres(hijo, tipoMonstruo);
+                string consulta = "SELECT type FROM monstruario WHERE type != '' GROUP BY type";
+                DataTable tabla = new DataTable();
+                adaptador = new MySqlDataAdapter(consulta, cadena);
+                adaptador.Fill(tabla);
+                TreeNode raiz = arbol.Nodes.Add("Tipos");
+                foreach (DataRow tipo in tabla.Rows)
+                {
+                    TreeNode hijo = raiz.Nodes.Add(tipo["type"].ToString());
+                    string tipoMonstruo = tipo["type"].ToString();
+                    listarNombres(hijo, tipoMonstruo);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         public void listarNombres(TreeNode nodo, string tipo)
         {
-            string consulta = $"SELECT name FROM monstruario WHERE type = '{tipo}'";
-            DataTable tabla = new DataTable();
-            adaptador = new MySqlDataAdapter(consulta, cadena);
-            adaptador.Fill(tabla);
-            foreach (DataRow nombre in tabla.Rows)
+            try
             {
-                nodo.Nodes.Add(nombre["name"].ToString());
+                string consulta = $"SELECT name FROM monstruario WHERE type = '{tipo}'";
+                DataTable tabla = new DataTable();
+                adaptador = new MySqlDataAdapter(consulta, cadena);
+                adaptador.Fill(tabla);
+                foreach (DataRow nombre in tabla.Rows)
+                {
+                    nodo.Nodes.Add(nombre["name"].ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         public void listarInfo(string nombre, Label lblTamano, Label lblTipo, Label lblFuerza, Label lblInteligencia, Label lblExp, Label lblDano)
         {
-            string consulta = $"SELECT size as Tamaño, type as Tipo, strength as Fuerza, intelligence as Inteligencia, xp as Experiencia, hit_points as Daño FROM `monstruario` WHERE name = '{nombre}'";
-            DataTable tabla = new DataTable();
-            adaptador = new MySqlDataAdapter(consulta, cadena);
-            adaptador.Fill(tabla);
-            if(tabla.Rows.Count > 0)
+            try
             {
-                lblTamano.Text = "Tamaño: " + tabla.Rows[0]["Tamaño"].ToString();
-                lblTipo.Text = "Tipo: " + tabla.Rows[0]["Tipo"].ToString();
-                lblFuerza.Text = "Fuerza: " + tabla.Rows[0]["Fuerza"].ToString();
-                lblInteligencia.Text = "Inteligencia: " + tabla.Rows[0]["Inteligencia"].ToString();
-                lblExp.Text = "Experiencia: " + tabla.Rows[0]["Experiencia"].ToString();
-                lblDano.Text = "Daño: " + tabla.Rows[0]["Daño"].ToString();
+                string consulta = $"SELECT size as Tamaño, type as Tipo, strength as Fuerza, intelligence as Inteligencia, xp as Experiencia, hit_points as Daño FROM `monstruario` WHERE name = '{nombre}'";
+                DataTable tabla = new DataTable();
+                adaptador = new MySqlDataAdapter(consulta, cadena);
+                adaptador.Fill(tabla);
+                if(tabla.Rows.Count > 0)
+                {
+                    lblTamano.Text = "Tamaño: " + tabla.Rows[0]["Tamaño"].ToString();
+                    lblTipo.Text = "Tipo: " + tabla.Rows[0]["Tipo"].ToString();
+                    lblFuerza.Text = "Fuerza: " + tabla.Rows[0]["Fuerza"].ToString();
+                    lblInteligencia.Text = "Inteligencia: " + tabla.Rows[0]["Inteligencia"].ToString();
+                    lblExp.Text = "Experiencia: " + tabla.Rows[0]["Experiencia"].ToString();
+                    lblDano.Text = "Daño: " + tabla.Rows[0]["Daño"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         public string buscarIndice(string nombre)
         {
-            string consulta = $"SELECT * FROM `monstruario` WHERE name = '{nombre}'";
-            DataTable tabla = new DataTable();
-            adaptador = new MySqlDataAdapter(consulta, cadena);
-            adaptador.Fill(tabla);
-            if (tabla.Rows.Count == 1)
+            try
             {
-                return tabla.Rows[0]["index"].ToString();
+                string consulta = $"SELECT * FROM `monstruario` WHERE name = '{nombre}'";
+                DataTable tabla = new DataTable();
+                adaptador = new MySqlDataAdapter(consulta, cadena);
+                adaptador.Fill(tabla);
+                if (tabla.Rows.Count == 1)
+                {
+                    return tabla.Rows[0]["index"].ToString();
+                }
+                else return "";
             }
-            else return "";
+            catch (Exception ex)
+            {
+                return "";
+                MessageBox.Show(ex.Message);
+            }
         }
 
     }

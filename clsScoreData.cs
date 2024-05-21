@@ -41,6 +41,7 @@ namespace pryValinotti
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 return 0;
             }
             return 0;
