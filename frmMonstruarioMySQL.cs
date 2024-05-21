@@ -32,7 +32,7 @@ namespace pryValinotti
 
         private void tvTipos_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            BD.listarInfo(dgvDetalles, e.Node.Text);
+            BD.listarInfo(e.Node.Text, lblTamano, lblTipo, lblFuerza, lblInteligencia, lblExp, lblDano);
             lblDatos.Text = "Datos detallados de: " + e.Node.Text;
             string indice = BD.buscarIndice(e.Node.Text);
             string url = "https://www.dnd5eapi.co/api/images/monsters/";

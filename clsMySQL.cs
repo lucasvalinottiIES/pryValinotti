@@ -48,13 +48,21 @@ namespace pryValinotti
             }
         }
 
-        public void listarInfo(DataGridView dgvInfo, string nombre)
+        public void listarInfo(string nombre, Label lblTamano, Label lblTipo, Label lblFuerza, Label lblInteligencia, Label lblExp, Label lblDano)
         {
-            string consulta = $"SELECT name, size, type, alignment, armor_class, hit_points, hit_dice, strength, intelligence FROM `monstruario` WHERE name = '{nombre}'";
+            string consulta = $"SELECT size as Tamaño, type as Tipo, strength as Fuerza, intelligence as Inteligencia, xp as Experiencia, hit_points as Daño FROM `monstruario` WHERE name = '{nombre}'";
             DataTable tabla = new DataTable();
             adaptador = new MySqlDataAdapter(consulta, cadena);
             adaptador.Fill(tabla);
-            dgvInfo.DataSource = tabla;
+            if(tabla.Rows.Count > 0)
+            {
+                lblTamano.Text = "Tamaño: " + tabla.Rows[0]["Tamaño"].ToString();
+                lblTipo.Text = "Tipo: " + tabla.Rows[0]["Tipo"].ToString();
+                lblFuerza.Text = "Fuerza: " + tabla.Rows[0]["Fuerza"].ToString();
+                lblInteligencia.Text = "Inteligencia: " + tabla.Rows[0]["Inteligencia"].ToString();
+                lblExp.Text = "Experiencia: " + tabla.Rows[0]["Experiencia"].ToString();
+                lblDano.Text = "Daño: " + tabla.Rows[0]["Daño"].ToString();
+            }
         }
 
         public string buscarIndice(string nombre)
