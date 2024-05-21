@@ -101,9 +101,28 @@ namespace pryValinotti
             }
             catch (Exception ex)
             {
-                return "";
                 MessageBox.Show(ex.Message);
+                return "";
             }
+        }
+
+        public List<clsPersonaje> cargarEnemigos()
+        {
+            string consulta = $"SELECT name as Nombre, xp as Vida, hit_dice as Daño FROM `monstruario`";
+            DataTable tabla = new DataTable();
+            adaptador = new MySqlDataAdapter(consulta, cadena);
+            adaptador.Fill(tabla);
+            List<clsPersonaje> listaEnemigos = new List<clsPersonaje>();
+            foreach (DataRow fila in tabla.Rows)
+            {
+                clsPersonaje enemigo = new clsPersonaje();
+                enemigo.Nombre = fila["Nombre"].ToString();
+                enemigo.Vida = int.Parse(fila["Vida"].ToString());
+                enemigo.Dano = fila["Daño"].ToString();
+                enemigo.Imagen = "";
+                listaEnemigos.Add(enemigo);
+            }
+            return listaEnemigos;
         }
 
     }

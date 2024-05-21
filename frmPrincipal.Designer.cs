@@ -108,6 +108,7 @@
             this.cmdJuegoRol.Name = "cmdJuegoRol";
             this.cmdJuegoRol.Size = new System.Drawing.Size(180, 22);
             this.cmdJuegoRol.Text = "Juego de Rol";
+            this.cmdJuegoRol.Click += new System.EventHandler(this.cmdJuegoRol_Click);
             // 
             // frmPrincipal
             // 

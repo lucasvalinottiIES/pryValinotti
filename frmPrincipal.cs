@@ -40,5 +40,11 @@ namespace pryValinotti
             frmMonstruarioAPI frm = new frmMonstruarioAPI();
             frm.ShowDialog();
         }
+
+        private void cmdJuegoRol_Click(object sender, EventArgs e)
+        {
+            frmCrearJugador frm = new frmCrearJugador();
+            frm.ShowDialog();
+        }
     }
 }
