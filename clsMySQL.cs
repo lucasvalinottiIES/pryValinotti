@@ -57,5 +57,18 @@ namespace pryValinotti
             dgvInfo.DataSource = tabla;
         }
 
+        public string buscarIndice(string nombre)
+        {
+            string consulta = $"SELECT * FROM `monstruario` WHERE name = '{nombre}'";
+            DataTable tabla = new DataTable();
+            adaptador = new MySqlDataAdapter(consulta, cadena);
+            adaptador.Fill(tabla);
+            if (tabla.Rows.Count == 1)
+            {
+                return tabla.Rows[0]["index"].ToString();
+            }
+            else return "";
+        }
+
     }
 }

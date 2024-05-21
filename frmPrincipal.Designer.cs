@@ -64,7 +64,7 @@
             // 
             this.cmdFirma.Image = ((System.Drawing.Image)(resources.GetObject("cmdFirma.Image")));
             this.cmdFirma.Name = "cmdFirma";
-            this.cmdFirma.Size = new System.Drawing.Size(180, 22);
+            this.cmdFirma.Size = new System.Drawing.Size(110, 22);
             this.cmdFirma.Text = "Firma";
             this.cmdFirma.Click += new System.EventHandler(this.cmdFirma_Click);
             // 
@@ -72,7 +72,7 @@
             // 
             this.cmdGalaga.Image = ((System.Drawing.Image)(resources.GetObject("cmdGalaga.Image")));
             this.cmdGalaga.Name = "cmdGalaga";
-            this.cmdGalaga.Size = new System.Drawing.Size(180, 22);
+            this.cmdGalaga.Size = new System.Drawing.Size(110, 22);
             this.cmdGalaga.Text = "Galaga";
             this.cmdGalaga.Click += new System.EventHandler(this.cmdGalaga_Click);
             // 
@@ -92,6 +92,7 @@
             this.cmdMonstruarioMySQL.Name = "cmdMonstruarioMySQL";
             this.cmdMonstruarioMySQL.Size = new System.Drawing.Size(180, 22);
             this.cmdMonstruarioMySQL.Text = "Monstruario MySQL";
+            this.cmdMonstruarioMySQL.Click += new System.EventHandler(this.cmdMonstruarioMySQL_Click);
             // 
             // cmdMonstruarioAPI
             // 
