@@ -33,13 +33,18 @@
             this.marzoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmdFirma = new System.Windows.Forms.ToolStripMenuItem();
             this.cmdGalaga = new System.Windows.Forms.ToolStripMenuItem();
+            this.iEFIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmdMonstruarioMySQL = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmdMonstruarioAPI = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmdJuegoRol = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.marzoToolStripMenuItem});
+            this.marzoToolStripMenuItem,
+            this.iEFIToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -52,8 +57,8 @@
             this.cmdFirma,
             this.cmdGalaga});
             this.marzoToolStripMenuItem.Name = "marzoToolStripMenuItem";
-            this.marzoToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
-            this.marzoToolStripMenuItem.Text = "Marzo";
+            this.marzoToolStripMenuItem.Size = new System.Drawing.Size(28, 20);
+            this.marzoToolStripMenuItem.Text = "IE";
             // 
             // cmdFirma
             // 
@@ -71,12 +76,44 @@
             this.cmdGalaga.Text = "Galaga";
             this.cmdGalaga.Click += new System.EventHandler(this.cmdGalaga_Click);
             // 
+            // iEFIToolStripMenuItem
+            // 
+            this.iEFIToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmdMonstruarioMySQL,
+            this.cmdMonstruarioAPI,
+            this.cmdJuegoRol});
+            this.iEFIToolStripMenuItem.Name = "iEFIToolStripMenuItem";
+            this.iEFIToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.iEFIToolStripMenuItem.Text = "IEFI";
+            // 
+            // cmdMonstruarioMySQL
+            // 
+            this.cmdMonstruarioMySQL.Image = ((System.Drawing.Image)(resources.GetObject("cmdMonstruarioMySQL.Image")));
+            this.cmdMonstruarioMySQL.Name = "cmdMonstruarioMySQL";
+            this.cmdMonstruarioMySQL.Size = new System.Drawing.Size(180, 22);
+            this.cmdMonstruarioMySQL.Text = "Monstruario MySQL";
+            // 
+            // cmdMonstruarioAPI
+            // 
+            this.cmdMonstruarioAPI.Image = ((System.Drawing.Image)(resources.GetObject("cmdMonstruarioAPI.Image")));
+            this.cmdMonstruarioAPI.Name = "cmdMonstruarioAPI";
+            this.cmdMonstruarioAPI.Size = new System.Drawing.Size(180, 22);
+            this.cmdMonstruarioAPI.Text = "Monstruario API";
+            // 
+            // cmdJuegoRol
+            // 
+            this.cmdJuegoRol.Image = ((System.Drawing.Image)(resources.GetObject("cmdJuegoRol.Image")));
+            this.cmdJuegoRol.Name = "cmdJuegoRol";
+            this.cmdJuegoRol.Size = new System.Drawing.Size(180, 22);
+            this.cmdJuegoRol.Text = "Juego de Rol";
+            // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -94,5 +131,9 @@
         private ToolStripMenuItem marzoToolStripMenuItem;
         private ToolStripMenuItem cmdFirma;
         private ToolStripMenuItem cmdGalaga;
+        private ToolStripMenuItem iEFIToolStripMenuItem;
+        private ToolStripMenuItem cmdMonstruarioMySQL;
+        private ToolStripMenuItem cmdMonstruarioAPI;
+        private ToolStripMenuItem cmdJuegoRol;
     }
 }
