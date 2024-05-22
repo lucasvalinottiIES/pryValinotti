@@ -18,15 +18,15 @@ namespace pryValinotti
         {
             InitializeComponent();
             jugador = personaje;
-            pbJugador.ImageLocation = jugador.Imagen;
-            lblJugador.Text = jugador.Nombre;
-            lblDano.Text = jugador.Dano;
-            lblVida.Text = jugador.Vida.ToString();
+            pbJugador.ImageLocation = $"./assets/JuegoRol/{jugador.Imagen}.png";
+            lblJugador.Text = "NOMBRE: " + jugador.Nombre;
+            lblDano.Text = "DAÑO: " + jugador.Dano;
+            lblVida.Text = "VIDA: " + jugador.Vida.ToString();
             enemigo = enemigo.crearEnemigo();
             pbEnemigo.ImageLocation = enemigo.Imagen;
-            lblEnemigo.Text = enemigo.Nombre;
-            lblDanoE.Text = enemigo.Dano;
-            lblVidaE.Text = enemigo.Vida.ToString();
+            lblEnemigo.Text = "NOMBRE: \n" + enemigo.Nombre;
+            lblDanoE.Text = "DAÑO: " + enemigo.Dano;
+            lblVidaE.Text = "VIDA: " + enemigo.Vida.ToString();
         }
     }
 }

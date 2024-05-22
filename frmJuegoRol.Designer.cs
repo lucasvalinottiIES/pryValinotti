@@ -43,7 +43,9 @@
             // 
             // pbEnemigo
             // 
-            this.pbEnemigo.Location = new System.Drawing.Point(619, 12);
+            this.pbEnemigo.BackColor = System.Drawing.Color.Transparent;
+            this.pbEnemigo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbEnemigo.Location = new System.Drawing.Point(670, 12);
             this.pbEnemigo.Name = "pbEnemigo";
             this.pbEnemigo.Size = new System.Drawing.Size(169, 169);
             this.pbEnemigo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -52,6 +54,7 @@
             // 
             // pbJugador
             // 
+            this.pbJugador.BackColor = System.Drawing.Color.Transparent;
             this.pbJugador.Location = new System.Drawing.Point(12, 269);
             this.pbJugador.Name = "pbJugador";
             this.pbJugador.Size = new System.Drawing.Size(169, 169);
@@ -62,60 +65,75 @@
             // lblJugador
             // 
             this.lblJugador.AutoSize = true;
-            this.lblJugador.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblJugador.Location = new System.Drawing.Point(12, 236);
+            this.lblJugador.BackColor = System.Drawing.Color.Transparent;
+            this.lblJugador.Font = new System.Drawing.Font("Trebuchet MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblJugador.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblJugador.Location = new System.Drawing.Point(187, 411);
             this.lblJugador.Name = "lblJugador";
-            this.lblJugador.Size = new System.Drawing.Size(107, 30);
+            this.lblJugador.Size = new System.Drawing.Size(101, 27);
             this.lblJugador.TabIndex = 2;
             this.lblJugador.Text = "JUGADOR";
             // 
             // lblEnemigo
             // 
             this.lblEnemigo.AutoSize = true;
-            this.lblEnemigo.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblEnemigo.Location = new System.Drawing.Point(681, 184);
+            this.lblEnemigo.BackColor = System.Drawing.Color.Transparent;
+            this.lblEnemigo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblEnemigo.Font = new System.Drawing.Font("Trebuchet MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblEnemigo.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblEnemigo.Location = new System.Drawing.Point(619, 248);
             this.lblEnemigo.Name = "lblEnemigo";
-            this.lblEnemigo.Size = new System.Drawing.Size(106, 30);
+            this.lblEnemigo.Size = new System.Drawing.Size(96, 27);
             this.lblEnemigo.TabIndex = 3;
             this.lblEnemigo.Text = "ENEMIGO";
             // 
             // lblVidaE
             // 
             this.lblVidaE.AutoSize = true;
-            this.lblVidaE.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblVidaE.Location = new System.Drawing.Point(553, 12);
+            this.lblVidaE.BackColor = System.Drawing.Color.Transparent;
+            this.lblVidaE.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblVidaE.Font = new System.Drawing.Font("Trebuchet MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblVidaE.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblVidaE.Location = new System.Drawing.Point(619, 194);
             this.lblVidaE.Name = "lblVidaE";
-            this.lblVidaE.Size = new System.Drawing.Size(60, 30);
+            this.lblVidaE.Size = new System.Drawing.Size(55, 27);
             this.lblVidaE.TabIndex = 4;
             this.lblVidaE.Text = "VIDA";
             // 
             // lblDanoE
             // 
             this.lblDanoE.AutoSize = true;
-            this.lblDanoE.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblDanoE.Location = new System.Drawing.Point(540, 51);
+            this.lblDanoE.BackColor = System.Drawing.Color.Transparent;
+            this.lblDanoE.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblDanoE.Font = new System.Drawing.Font("Trebuchet MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblDanoE.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblDanoE.Location = new System.Drawing.Point(619, 221);
             this.lblDanoE.Name = "lblDanoE";
-            this.lblDanoE.Size = new System.Drawing.Size(73, 30);
+            this.lblDanoE.Size = new System.Drawing.Size(64, 27);
             this.lblDanoE.TabIndex = 5;
             this.lblDanoE.Text = "DAÑO";
             // 
             // lblDano
             // 
             this.lblDano.AutoSize = true;
-            this.lblDano.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblDano.Location = new System.Drawing.Point(187, 407);
+            this.lblDano.BackColor = System.Drawing.Color.Transparent;
+            this.lblDano.Font = new System.Drawing.Font("Trebuchet MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblDano.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblDano.Location = new System.Drawing.Point(187, 381);
             this.lblDano.Name = "lblDano";
-            this.lblDano.Size = new System.Drawing.Size(73, 30);
+            this.lblDano.Size = new System.Drawing.Size(64, 27);
             this.lblDano.TabIndex = 7;
             this.lblDano.Text = "DAÑO";
             // 
             // lblVida
             // 
             this.lblVida.AutoSize = true;
-            this.lblVida.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblVida.Location = new System.Drawing.Point(187, 366);
+            this.lblVida.BackColor = System.Drawing.Color.Transparent;
+            this.lblVida.Font = new System.Drawing.Font("Trebuchet MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblVida.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblVida.Location = new System.Drawing.Point(187, 354);
             this.lblVida.Name = "lblVida";
-            this.lblVida.Size = new System.Drawing.Size(60, 30);
+            this.lblVida.Size = new System.Drawing.Size(55, 27);
             this.lblVida.TabIndex = 6;
             this.lblVida.Text = "VIDA";
             // 
@@ -123,7 +141,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(851, 450);
             this.Controls.Add(this.lblDano);
             this.Controls.Add(this.lblVida);
             this.Controls.Add(this.lblDanoE);

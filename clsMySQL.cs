@@ -14,6 +14,7 @@ namespace pryValinotti
         string cadena = "Server=localhost;Database=dbmonstruos;Uid=root;Pwd=;";
         MySqlConnection conexion;
         MySqlDataAdapter adaptador;
+        MySqlCommand comando;
 
         public clsMySQL()
         {
@@ -105,10 +106,10 @@ namespace pryValinotti
                 return "";
             }
         }
-
+        #region JuegoRol
         public List<clsPersonaje> cargarEnemigos()
         {
-            string consulta = $"SELECT name as Nombre, xp as Vida, hit_dice as Daño FROM `monstruario`";
+            string consulta = $"SELECT name as Nombre, xp as Vida, hit_dice as Daño FROM `monstruario` WHERE xp > 1500";
             DataTable tabla = new DataTable();
             adaptador = new MySqlDataAdapter(consulta, cadena);
             adaptador.Fill(tabla);
@@ -117,13 +118,51 @@ namespace pryValinotti
             {
                 clsPersonaje enemigo = new clsPersonaje();
                 enemigo.Nombre = fila["Nombre"].ToString();
-                enemigo.Vida = int.Parse(fila["Vida"].ToString());
+                string vida = fila["Vida"].ToString();
+                enemigo.Vida = Convert.ToInt32(vida);
                 enemigo.Dano = fila["Daño"].ToString();
                 enemigo.Imagen = "";
                 listaEnemigos.Add(enemigo);
             }
             return listaEnemigos;
         }
+
+        public List<clsPersonaje> listarJugadores()
+        {
+            string consulta = $"SELECT * FROM `jugador`";
+            DataTable tabla = new DataTable();
+            adaptador = new MySqlDataAdapter(consulta, cadena);
+            adaptador.Fill(tabla);
+            List<clsPersonaje> listaJugadores = new List<clsPersonaje>();
+            foreach (DataRow fila in tabla.Rows)
+            {
+                clsPersonaje jugador = new clsPersonaje();
+                jugador.Nombre = fila["Nombre"].ToString();
+                jugador.Vida = Convert.ToInt32(fila["Vida"].ToString());
+                jugador.Dano = fila["Ataque"].ToString();
+                jugador.Imagen = fila["Imagen"].ToString();
+                listaJugadores.Add(jugador);
+            }
+            return listaJugadores;
+        }
+
+        public void guardarJugador(clsPersonaje jugador)
+        {
+            try
+            {
+                conexion.Open();
+                string consulta = $"INSERT INTO `jugador`(`Nombre`, `Ataque`, `Imagen`, `Vida`) VALUES ('{jugador.Nombre}','{jugador.Dano}','{jugador.Imagen}','{jugador.Vida}')";
+                comando = new MySqlCommand(consulta, conexion);
+                comando.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                conexion.Close();
+                MessageBox.Show(ex.Message);
+            }
+        }
+        
+        #endregion
 
     }
 }
