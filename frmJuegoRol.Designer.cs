@@ -51,6 +51,7 @@
             this.pbEnemigo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbEnemigo.TabIndex = 0;
             this.pbEnemigo.TabStop = false;
+            this.pbEnemigo.Click += new System.EventHandler(this.pbEnemigo_Click);
             // 
             // pbJugador
             // 
@@ -86,6 +87,7 @@
             this.lblEnemigo.Size = new System.Drawing.Size(96, 27);
             this.lblEnemigo.TabIndex = 3;
             this.lblEnemigo.Text = "ENEMIGO";
+            this.lblEnemigo.Click += new System.EventHandler(this.pbEnemigo_Click);
             // 
             // lblVidaE
             // 
@@ -99,6 +101,7 @@
             this.lblVidaE.Size = new System.Drawing.Size(55, 27);
             this.lblVidaE.TabIndex = 4;
             this.lblVidaE.Text = "VIDA";
+            this.lblVidaE.Click += new System.EventHandler(this.pbEnemigo_Click);
             // 
             // lblDanoE
             // 
@@ -112,6 +115,7 @@
             this.lblDanoE.Size = new System.Drawing.Size(64, 27);
             this.lblDanoE.TabIndex = 5;
             this.lblDanoE.Text = "DAÑO";
+            this.lblDanoE.Click += new System.EventHandler(this.pbEnemigo_Click);
             // 
             // lblDano
             // 
@@ -158,6 +162,7 @@
             this.Name = "frmJuegoRol";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Juego de Rol";
+            this.Load += new System.EventHandler(this.frmJuegoRol_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbEnemigo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbJugador)).EndInit();
             this.ResumeLayout(false);

@@ -109,7 +109,7 @@ namespace pryValinotti
         #region JuegoRol
         public List<clsPersonaje> cargarEnemigos()
         {
-            string consulta = $"SELECT name as Nombre, xp as Vida, hit_dice as Daño FROM `monstruario` WHERE xp > 1500";
+            string consulta = $"SELECT name as Nombre, xp as Vida, hit_dice as Daño FROM `monstruario` WHERE xp > 1500 and xp < 8000";
             DataTable tabla = new DataTable();
             adaptador = new MySqlDataAdapter(consulta, cadena);
             adaptador.Fill(tabla);
